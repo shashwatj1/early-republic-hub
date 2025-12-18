@@ -129,9 +129,9 @@ early-republic-hub/
 
 ## 👥 Credits
 
-Created by [Your Name] for [Your Teacher's Name]'s APUSH class
-[Your School Name]
-Due: December 2024
+Created by Shashwat Jaipuriar, William Durfee, and Revanth Soma for Mr. Spiegal's APUSH class
+Hopkinton High School
+Due: December 2025
 
 ## 📄 License
 
