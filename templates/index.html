@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+{% block title %}The Early Republic Hub - Party Politics & Power{% endblock %}
+
+{% block content %}
+<!-- Hero Section - Split Screen Political Arena -->
+<section id="hero" class="vh-100 position-relative overflow-hidden">
+    <!-- Federalists Side (Left) -->
+    <div class="party-side federalist-side">
+        <div class="party-content">
+            <div class="party-icon">⚓</div>
+            <h2 class="party-name">FEDERALISTS</h2>
+            <p class="party-leaders">Adams • Hamilton • Ames</p>
+            <div class="party-principles">
+                <p>✓ Strong Federal Government</p>
+                <p>✓ Loose Constitution</p>
+                <p>✓ Support Tariffs & Banks</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Democratic-Republicans Side (Right) -->
+    <div class="party-side democratic-side">
+        <div class="party-content">
+            <div class="party-icon">🦅</div>
+            <h2 class="party-name">DEMOCRATIC-REPUBLICANS</h2>
+            <p class="party-leaders">Jefferson • Madison • Monroe</p>
+            <div class="party-principles">
+                <p>✓ States' Rights</p>
+                <p>✓ Strict Constitution</p>
+                <p>✓ Oppose Tariffs & Banks</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Center Debate Floor -->
+    <div class="debate-floor">
+        <div class="debate-content text-center">
+            <h1 class="display-3 fw-bold mb-3 hero-title">THE POLITICAL ARENA</h1>
+            <p class="lead mb-4 hero-subtitle">1800-1825: The Age of Party Politics</p>
+            
+            <div class="debate-topics mb-4">
+                <h3 class="mb-3">⚔️ MAJOR DEBATES ⚔️</h3>
+                <div class="d-flex justify-content-center flex-wrap gap-3">
+                    <span class="debate-badge">💰 Tariffs</span>
+                    <span class="debate-badge">⚖️ Federal Power</span>
+                    <span class="debate-badge">🌍 European Relations</span>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="/learn" class="btn btn-custom btn-lg me-2 mb-2">Begin Your Journey</a>
+                <a href="/games" class="btn btn-custom-outline btn-lg mb-2">Play Games</a>
+            </div>
+            
+            <div class="scroll-indicator mt-4">
+                <p class="small">↓ Scroll to explore ↓</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Animated Lightning Bolts -->
+    <div class="lightning lightning-1"></div>
+    <div class="lightning lightning-2"></div>
+</section>
+
+<!-- Key Concept Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="concept-box p-5 shadow-lg">
+                    <h2 class="text-center mb-4">📜 Key Historical Concept</h2>
+                    <blockquote class="blockquote text-center">
+                        <p class="lead fst-italic">
+                            "In the early 1800s, national political parties continued to debate issues 
+                            such as the tariff, powers of the federal government, and relations with European powers"
+                        </p>
+                    </blockquote>
+                    <p class="text-center text-muted mt-3">
+                        This website explores 14 crucial terms that shaped America's early republic through 
+                        interactive games, visualizations, and historical thinking skills.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Historical Thinking Skills Highlight -->
+<section class="py-5 bg-gradient">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="display-4 mb-3" style="color: #1a1a1a; font-weight: 900; text-shadow: 2px 2px 4px rgba(255,255,255,0.3);">🧠 Master Historical Thinking Skills</h2>
+            <p class="lead" style="color: #2d2d2d; font-weight: 600;">Apply the same critical analysis skills used by professional historians</p>
+        </div>
+        
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="skill-preview">
+                    <div class="skill-preview-icon">🔄</div>
+                    <h5>Change & Continuity</h5>
+                    <p class="small">Interactive slider showing what changed vs what stayed the same</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="skill-preview">
+                    <div class="skill-preview-icon">⛓️</div>
+                    <h5>Cause & Effect</h5>
+                    <p class="small">Build domino chains showing how events led to each other</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="skill-preview">
+                    <div class="skill-preview-icon">⚖️</div>
+                    <h5>Compare & Contrast</h5>
+                    <p class="small">Drag-and-drop Venn diagram of party positions</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="skill-preview">
+                    <div class="skill-preview-icon">🌍</div>
+                    <h5>Contextualization</h5>
+                    <p class="small">Dual timeline showing America in world context</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="/learn/historical-thinking" class="btn btn-light btn-lg">
+                Explore Historical Thinking Skills →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Grid -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 display-5">Explore History Interactively</h2>
+        
+        <div class="row g-4">
+            <!-- Learn Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card h-100">
+                    <div class="feature-icon">📚</div>
+                    <h3>Learn the Story</h3>
+                    <p>Explore 14 key terms through three thematic "rooms": Economic Policy, Federal Power, and European Relations</p>
+                    <a href="/learn" class="btn btn-sm btn-outline-primary mt-2">Start Learning →</a>
+                </div>
+            </div>
+            
+            <!-- Games Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card h-100">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Play 8 Games</h3>
+                    <p>Master historical concepts through interactive games: Political Sorter, Debate Showdown, Timeline Challenge, and more!</p>
+                    <a href="/games" class="btn btn-sm btn-outline-primary mt-2">Play Now →</a>
+                </div>
+            </div>
+            
+            <!-- Visualizations Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card h-100">
+                    <div class="feature-icon">📊</div>
+                    <h3>Visual Breakdown</h3>
+                    <p>Interactive timelines, cause-effect webs, and party comparison matrices bring history to life</p>
+                    <a href="/visualizations" class="btn btn-sm btn-outline-primary mt-2">Visualize →</a>
+                </div>
+            </div>
+            
+            <!-- Quiz Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card h-100">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Test Yourself</h3>
+                    <p>Multiple quiz formats including APUSH-style questions, speed rounds, and scenario-based assessments</p>
+                    <a href="/quiz" class="btn btn-sm btn-outline-primary mt-2">Take Quiz →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Terms Preview -->
+<section class="py-5 bg-dark text-light">
+    <div class="container">
+        <h2 class="text-center mb-5">The 14 Essential Terms</h2>
+        
+        <div class="row g-3">
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Elastic Clause</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Tariff</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Democratic-Republicans</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Federalists</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Whiskey Tax</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Louisiana Purchase</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Hartford Convention</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">War of 1812</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Embargo Act of 1807</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Play-off System</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Impressment</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Treaty of Ghent</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">Monroe Doctrine</div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="term-badge">American System</div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/learn" class="btn btn-light btn-lg">Explore All Terms →</a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-gradient">
+    <div class="container text-center">
+        <h2 class="display-4 mb-3" style="color: #1a1a1a; font-weight: 900; text-shadow: 2px 2px 4px rgba(255,255,255,0.3);">Ready to Master the Early Republic?</h2>
+        <p class="lead mb-4" style="color: #2d2d2d; font-weight: 600;">
+            Join thousands of students exploring America's formative years through interactive learning
+        </p>
+        <a href="/games" class="btn btn-light btn-lg">Start Playing Now</a>
+    </div>
+</section>
+{% endblock %}

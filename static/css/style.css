@@ -1,0 +1,536 @@
+/* ========================================
+   EARLY REPUBLIC HUB - CUSTOM STYLES
+   Historical Newspaper/Gazette Aesthetic
+   ======================================== */
+
+:root {
+    /* Federalist Colors (Blue/Silver) */
+    --federalist-primary: #1e3a8a;
+    --federalist-light: #60a5fa;
+    --federalist-dark: #0f172a;
+    
+    /* Democratic-Republican Colors (Red/Gold) */
+    --democratic-primary: #991b1b;
+    --democratic-light: #fca5a5;
+    --democratic-dark: #450a0a;
+    
+    /* Issue Category Colors */
+    --economic: #f59e0b;
+    --federal-power: #8b5cf6;
+    --european: #10b981;
+    
+    /* Neutral Colors */
+    --parchment: #f5f1e8;
+    --ink: #1a1a1a;
+    --sepia: #704214;
+    
+    /* Typography */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Libre Baskerville', serif;
+    --font-accent: 'Crimson Text', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background-color: var(--parchment);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+   
+#mainNav {
+    background: linear-gradient(90deg, var(--federalist-dark) 0%, var(--democratic-dark) 100%);
+    border-bottom: 4px double #d4af37;
+    padding: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-display);
+}
+
+.brand-text {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #d4af37;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+}
+
+.brand-subtitle {
+    font-size: 0.9rem;
+    color: #fff;
+    letter-spacing: 3px;
+    opacity: 0.9;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    font-family: var(--font-accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #d4af37;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+.nav-link:hover {
+    color: #d4af37 !important;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   HERO SECTION - SPLIT SCREEN
+   ======================================== */
+   
+#hero {
+    position: relative;
+    display: flex;
+    background: linear-gradient(to bottom, #2c3e50 0%, #34495e 100%);
+}
+
+.party-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.federalist-side {
+    background: linear-gradient(135deg, var(--federalist-dark) 0%, var(--federalist-primary) 100%);
+    border-right: 3px solid #d4af37;
+}
+
+.democratic-side {
+    background: linear-gradient(135deg, var(--democratic-primary) 0%, var(--democratic-dark) 100%);
+    border-left: 3px solid #d4af37;
+}
+
+.party-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+}
+
+.party-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    animation: fadeInUp 1s ease;
+}
+
+.party-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+.party-name {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+}
+
+.party-leaders {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.party-principles p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    opacity: 0.95;
+}
+
+/* Debate Floor (Center) */
+.debate-floor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%;
+    max-width: 800px;
+}
+
+.debate-content {
+    background: rgba(0,0,0,0.85);
+    border: 4px double #d4af37;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    animation: fadeInScale 1.2s ease;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    color: #d4af37;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.7);
+    animation: glow 3s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    color: #fff;
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.debate-topics h3 {
+    color: #d4af37;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.debate-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #d4af37, #f7dc6f);
+    color: #000;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.debate-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+}
+
+/* Buttons */
+.btn-custom {
+    background: linear-gradient(135deg, #d4af37, #f7dc6f);
+    color: #000;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+    color: #000;
+}
+
+.btn-custom-outline {
+    background: transparent;
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    padding: 0.8rem 2rem;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.btn-custom-outline:hover {
+    background: #d4af37;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+/* Lightning Animations */
+.lightning {
+    position: absolute;
+    width: 3px;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, #d4af37, transparent);
+    opacity: 0;
+    animation: lightning 3s infinite;
+}
+
+.lightning-1 {
+    top: 20%;
+    left: 25%;
+    animation-delay: 0.5s;
+}
+
+.lightning-2 {
+    top: 60%;
+    right: 25%;
+    animation-delay: 1.5s;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    color: #d4af37;
+    animation: pulse 2s infinite;
+}
+
+/* ========================================
+   CONCEPT BOX
+   ======================================== */
+   
+.concept-box {
+    background: #fff;
+    border: 3px solid var(--sepia);
+    border-radius: 15px;
+    position: relative;
+}
+
+.concept-box::before {
+    content: '📜';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    background: #fff;
+    padding: 0 1rem;
+}
+
+.blockquote {
+    border-left: 4px solid var(--sepia);
+    padding-left: 2rem;
+}
+
+/* ========================================
+   FEATURE CARDS
+   ======================================== */
+   
+.feature-card {
+    background: #fff;
+    border: 2px solid var(--sepia);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    border-color: #d4af37;
+}
+
+.feature-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--sepia);
+}
+
+/* ========================================
+   TERM BADGES
+   ======================================== */
+   
+.term-badge {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.term-badge:hover {
+    background: linear-gradient(135deg, #d4af37, #f7dc6f);
+    color: #000;
+    border-color: #d4af37;
+    transform: scale(1.05);
+}
+
+/* ========================================
+   BACKGROUND GRADIENT SECTION
+   ======================================== */
+   
+.bg-gradient {
+    background: linear-gradient(135deg, var(--federalist-primary), var(--democratic-primary));
+}
+
+.skill-preview {
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.skill-preview:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.skill-preview-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-preview h5 {
+    color: var(--sepia);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+   
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 4px 4px 8px rgba(0,0,0,0.7),
+                     0 0 20px rgba(212, 175, 55, 0.4);
+    }
+    50% {
+        text-shadow: 4px 4px 8px rgba(0,0,0,0.7),
+                     0 0 40px rgba(212, 175, 55, 0.8);
+    }
+}
+
+@keyframes lightning {
+    0%, 90%, 100% {
+        opacity: 0;
+    }
+    91% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+   
+@media (max-width: 768px) {
+    #hero {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .party-side {
+        min-height: 40vh;
+    }
+    
+    .federalist-side {
+        border-right: none;
+        border-bottom: 3px solid #d4af37;
+    }
+    
+    .democratic-side {
+        border-left: none;
+        border-top: 3px solid #d4af37;
+    }
+    
+    .debate-floor {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+    
+    .debate-content {
+        padding: 2rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .party-name {
+        font-size: 2rem;
+    }
+}

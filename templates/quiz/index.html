@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Test Yourself - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-3 fw-bold" style="font-family: var(--font-display); color: var(--sepia);">
+                🏆 TEST YOURSELF
+            </h1>
+            <p class="lead">Multiple quiz formats to assess your mastery</p>
+        </div>
+        
+        <div class="row g-4 justify-content-center">
+            <!-- Traditional Quiz -->
+            <div class="col-md-6 col-lg-4">
+                <div class="quiz-card">
+                    <div class="quiz-icon">📝</div>
+                    <h3>Traditional Quiz</h3>
+                    <p>30 multiple choice questions covering all 14 terms</p>
+                    <div class="mb-3">
+                        <span class="badge bg-primary">30 Questions</span>
+                        <span class="badge bg-info">20 Minutes</span>
+                    </div>
+                    <button class="btn btn-custom" onclick="alert('Coming soon!')">Start Quiz →</button>
+                </div>
+            </div>
+            
+            <!-- Speed Round -->
+            <div class="col-md-6 col-lg-4">
+                <div class="quiz-card">
+                    <div class="quiz-icon">⚡</div>
+                    <h3>Speed Round</h3>
+                    <p>How many can you answer correctly in 60 seconds?</p>
+                    <div class="mb-3">
+                        <span class="badge bg-danger">Fast-Paced</span>
+                        <span class="badge bg-warning text-dark">Leaderboard</span>
+                    </div>
+                    <button class="btn btn-custom" onclick="alert('Coming soon!')">Start Speed Round →</button>
+                </div>
+            </div>
+            
+            <!-- APUSH Practice -->
+            <div class="col-md-6 col-lg-4">
+                <div class="quiz-card">
+                    <div class="quiz-icon">🎓</div>
+                    <h3>APUSH-Style DBQ</h3>
+                    <p>Practice with AP exam-style document-based questions</p>
+                    <div class="mb-3">
+                        <span class="badge bg-success">Exam Prep</span>
+                        <span class="badge bg-info">With Documents</span>
+                    </div>
+                    <button class="btn btn-custom" onclick="alert('Coming soon!')">Practice DBQ →</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5 p-4 bg-light rounded">
+            <h3>📊 Your Progress</h3>
+            <p class="mb-3">Track your mastery across all 14 terms</p>
+            <div class="progress" style="height: 30px;">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" id="progressBar">
+                    0% Complete
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/" class="btn btn-outline-secondary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.quiz-card {
+    background: white;
+    border: 3px solid var(--sepia);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.quiz-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    border-color: #d4af37;
+}
+
+.quiz-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.quiz-card h3 {
+    font-family: var(--font-display);
+    color: var(--sepia);
+    margin-bottom: 1rem;
+}
+</style>
+{% endblock %}

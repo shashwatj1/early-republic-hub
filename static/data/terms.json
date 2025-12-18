@@ -1,0 +1,158 @@
+{
+  "terms": [
+    {
+      "id": 1,
+      "name": "Elastic Clause",
+      "definition": "Article I, Section 8 of the Constitution allowing Congress to make laws 'necessary and proper' to execute its powers",
+      "year": 1787,
+      "category": "Federal Power",
+      "federalistPosition": "Supported - believed it gave flexibility for strong federal government",
+      "democraticRepublicanPosition": "Opposed - believed in strict interpretation of Constitution",
+      "significance": "Central to debates about how much power the federal government should have",
+      "connections": ["Louisiana Purchase", "American System"]
+    },
+    {
+      "id": 2,
+      "name": "Tariff",
+      "definition": "A tax on imported goods, used to protect American industries and raise revenue",
+      "year": "1790s-1820s",
+      "category": "Economic Policy",
+      "federalistPosition": "Strongly supported - wanted to protect Northern manufacturing",
+      "democraticRepublicanPosition": "Generally opposed - hurt farmers who needed cheap imported goods",
+      "significance": "Major source of conflict between agricultural South and industrial North",
+      "connections": ["American System"]
+    },
+    {
+      "id": 3,
+      "name": "Democratic-Republicans",
+      "definition": "Political party led by Jefferson and Madison favoring states' rights, strict Constitution interpretation, and agricultural interests",
+      "year": "1790s-1820s",
+      "category": "Federal Power",
+      "federalistPosition": "Opposition party",
+      "democraticRepublicanPosition": "Their own party - championed individual liberty and limited federal power",
+      "significance": "Dominated politics after 1800, eventually became only major party",
+      "connections": ["Federalists", "Embargo Act", "Louisiana Purchase"]
+    },
+    {
+      "id": 4,
+      "name": "Federalists",
+      "definition": "Political party led by Hamilton and Adams favoring strong central government, loose Constitution interpretation, and commercial interests",
+      "year": "1790s-1810s",
+      "category": "Federal Power",
+      "federalistPosition": "Their own party - believed in strong national government",
+      "democraticRepublicanPosition": "Opposition party",
+      "significance": "Declined after War of 1812 and Hartford Convention",
+      "connections": ["Democratic-Republicans", "Hartford Convention"]
+    },
+    {
+      "id": 5,
+      "name": "Internal Taxes (Whiskey Tax)",
+      "definition": "Federal tax on whiskey (1791) that sparked the Whiskey Rebellion, testing federal authority",
+      "year": 1791,
+      "category": "Economic Policy",
+      "federalistPosition": "Supported - needed revenue and showed federal power",
+      "democraticRepublicanPosition": "Opposed - violated states' rights and hurt farmers",
+      "significance": "Demonstrated federal government could enforce laws, but created resentment",
+      "connections": ["Elastic Clause"]
+    },
+    {
+      "id": 6,
+      "name": "Louisiana Purchase",
+      "definition": "1803 purchase of Louisiana Territory from France for $15 million, doubling U.S. size",
+      "year": 1803,
+      "category": "Federal Power",
+      "federalistPosition": "Opposed - Constitution didn't explicitly allow it, too much power for president",
+      "democraticRepublicanPosition": "Supported (despite Jefferson's doubts) - too good to pass up",
+      "significance": "Showed Jefferson compromising his principles for practical benefit",
+      "connections": ["Elastic Clause"]
+    },
+    {
+      "id": 7,
+      "name": "Hartford Convention",
+      "definition": "1814 meeting of New England Federalists to protest War of 1812 and propose constitutional amendments",
+      "year": 1814,
+      "category": "Federal Power",
+      "federalistPosition": "Organized it - wanted to limit Democratic-Republican power",
+      "democraticRepublicanPosition": "Condemned it as unpatriotic during wartime",
+      "significance": "Destroyed Federalist Party's reputation and political power",
+      "connections": ["War of 1812", "Federalists"]
+    },
+    {
+      "id": 8,
+      "name": "War of 1812",
+      "definition": "War between U.S. and Britain over impressment, trade restrictions, and British support of Native Americans",
+      "year": "1812-1815",
+      "category": "European Relations",
+      "federalistPosition": "Strongly opposed - hurt New England trade",
+      "democraticRepublicanPosition": "Supported (War Hawks) - defend American honor and rights",
+      "significance": "Strengthened American nationalism despite mixed military results",
+      "connections": ["Embargo Act", "Impressment", "Treaty of Ghent", "Hartford Convention"]
+    },
+    {
+      "id": 9,
+      "name": "Embargo Act of 1807",
+      "definition": "Jefferson's law stopping all American exports to force Britain and France to respect U.S. neutrality",
+      "year": 1807,
+      "category": "European Relations",
+      "federalistPosition": "Strongly opposed - devastated New England economy",
+      "democraticRepublicanPosition": "Supported as 'peaceable coercion' alternative to war",
+      "significance": "Economic disaster that led to smuggling and eventually War of 1812",
+      "connections": ["Impressment", "War of 1812"]
+    },
+    {
+      "id": 10,
+      "name": "Play-off System",
+      "definition": "Native American diplomatic strategy of playing European powers against each other to maintain independence",
+      "year": "1700s-1810s",
+      "category": "European Relations",
+      "federalistPosition": "Saw Native Americans as obstacles to expansion",
+      "democraticRepublicanPosition": "Also saw them as obstacles, despite some sympathy",
+      "significance": "Collapsed when Britain stopped supporting Native Americans after War of 1812",
+      "connections": ["War of 1812"]
+    },
+    {
+      "id": 11,
+      "name": "Impressment",
+      "definition": "British practice of forcing American sailors to serve in Royal Navy, major cause of War of 1812",
+      "year": "1790s-1812",
+      "category": "European Relations",
+      "federalistPosition": "Opposed but preferred negotiation over war",
+      "democraticRepublicanPosition": "Outraged - violation of American sovereignty",
+      "significance": "Around 6,000 Americans impressed; major cause of War of 1812",
+      "connections": ["Embargo Act", "War of 1812"]
+    },
+    {
+      "id": 12,
+      "name": "Treaty of Ghent",
+      "definition": "1814 treaty ending War of 1812 by restoring pre-war boundaries (status quo ante bellum)",
+      "year": 1814,
+      "category": "European Relations",
+      "federalistPosition": "Relieved war was over",
+      "democraticRepublicanPosition": "Celebrated as victory despite no territorial gains",
+      "significance": "Ended war before news reached New Orleans; improved U.S.-British relations",
+      "connections": ["War of 1812"]
+    },
+    {
+      "id": 13,
+      "name": "Monroe Doctrine",
+      "definition": "1823 declaration that Western Hemisphere was off-limits to new European colonization",
+      "year": 1823,
+      "category": "European Relations",
+      "federalistPosition": "Federalist Party effectively dead by this time",
+      "democraticRepublicanPosition": "Strongly supported - asserted American power",
+      "significance": "Bold foreign policy statement establishing U.S. sphere of influence",
+      "connections": []
+    },
+    {
+      "id": 14,
+      "name": "American System",
+      "definition": "Henry Clay's plan for national economic development: national bank, protective tariffs, internal improvements",
+      "year": "1810s-1820s",
+      "category": "Economic Policy",
+      "federalistPosition": "Supported similar ideas earlier",
+      "democraticRepublicanPosition": "Mixed - some supported (Clay), others opposed on constitutional grounds",
+      "significance": "Showed D-Rs adopting some Federalist economic ideas after 1815",
+      "connections": ["Tariff", "Elastic Clause"]
+    }
+  ]
+}
