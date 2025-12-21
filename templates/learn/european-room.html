@@ -1,0 +1,533 @@
+{% extends "base.html" %}
+
+{% block title %}European Relations Room - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Room Header -->
+        <div class="room-header text-center mb-5" style="background: linear-gradient(135deg, #10b981, #059669);">
+            <div class="room-icon-large">🌍</div>
+            <h1 class="display-3 fw-bold" style="font-family: var(--font-display); color: white;">
+                EUROPEAN RELATIONS ROOM
+            </h1>
+            <p class="lead text-white">Navigate the complex world of foreign policy</p>
+            <div class="breadcrumb-nav">
+                <a href="/" style="color: white;">Home</a> → <a href="/learn" style="color: white;">Learn</a> → European Relations
+            </div>
+        </div>
+
+        <!-- Terms in This Room -->
+        <div class="alert alert-info mb-5">
+            <h4>📋 Terms You'll Learn:</h4>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-primary">Impressment</span>
+                <span class="badge bg-primary">Embargo Act (1807)</span>
+                <span class="badge bg-primary">War of 1812</span>
+                <span class="badge bg-primary">Treaty of Ghent</span>
+                <span class="badge bg-primary">Monroe Doctrine</span>
+            </div>
+        </div>
+
+        <!-- Module 1: Impressment Crisis -->
+        <div class="learning-module mb-5">
+            <h2 class="module-title">⚓ The Impressment Crisis</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="simulator-box">
+                        <h4>You are a merchant ship captain (1805)</h4>
+                        
+                        <div class="scenario-box bg-danger text-white">
+                            <h5>🚨 SCENARIO: British Warship Approaches!</h5>
+                            <p>A British Royal Navy ship fires a warning shot across your bow. They're boarding your vessel to search for British deserters.</p>
+                            <p><strong>What they claim:</strong> "Once British, always British. These sailors are ours!"</p>
+                            <p><strong>The reality:</strong> Many of your crew are naturalized American citizens. The British don't care - they need sailors for their war with Napoleon.</p>
+                        </div>
+
+                        <h5 class="mt-4">What happens during impressment:</h5>
+                        <div class="impressment-demo">
+                            <button class="btn btn-lg btn-warning w-100" onclick="runImpressment()">
+                                ⚠️ Start Impressment Simulation
+                            </button>
+                            <div id="impressmentSteps" style="display: none;" class="mt-4"></div>
+                        </div>
+
+                        <div class="stats-box mt-4">
+                            <h5>📊 Historical Stats:</h5>
+                            <div class="row g-3 text-center">
+                                <div class="col-md-4">
+                                    <div class="stat-card">
+                                        <div class="stat-number">10,000+</div>
+                                        <div class="stat-label">Americans Impressed (1803-1812)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="stat-card">
+                                        <div class="stat-number">6,000</div>
+                                        <div class="stat-label">British Ships Blockading Ports</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="stat-card">
+                                        <div class="stat-number">917</div>
+                                        <div class="stat-label">American Ships Seized (1803-1812)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-card">
+                        <h4>📚 Impressment</h4>
+                        <p><strong>Definition:</strong> Forcibly seizing American sailors and forcing them to serve on British ships</p>
+                        
+                        <h5 class="mt-3">Why Britain Did This:</h5>
+                        <ul class="small">
+                            <li>War with Napoleon = needed sailors desperately</li>
+                            <li>Royal Navy lost thousands to desertion</li>
+                            <li>American merchant ships paid better</li>
+                            <li>Claimed "once British, always British"</li>
+                        </ul>
+                        
+                        <h5 class="mt-3">Why Americans Were Furious:</h5>
+                        <ul class="small">
+                            <li>Violation of American sovereignty</li>
+                            <li>Many victims were naturalized U.S. citizens</li>
+                            <li>Britain treated U.S. like a colony, not an independent nation</li>
+                            <li>Reminded Americans of pre-Revolution abuses</li>
+                        </ul>
+                        
+                        <div class="alert alert-danger mt-3">
+                            <strong>Direct Cause:</strong> Impressment was THE main cause of War of 1812!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 2: Embargo Act Decision -->
+        <div class="learning-module mb-5">
+            <h2 class="module-title">🚢 Jefferson's Embargo Experiment</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="simulator-box">
+                        <h4>You are President Jefferson (1807)</h4>
+                        
+                        <div class="problem-box">
+                            <h5>😤 THE PROBLEM:</h5>
+                            <ul>
+                                <li>Britain impressing American sailors</li>
+                                <li>Britain and France seizing American ships</li>
+                                <li>Americans demanding action</li>
+                                <li>BUT you want to avoid war!</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="mt-4">Jefferson's Idea: "Peaceable Coercion"</h5>
+                        <p><strong>Theory:</strong> If America stops ALL trade with Europe, Britain and France will suffer economically and respect American rights!</p>
+                        
+                        <div class="embargo-calculator">
+                            <h6>Economic Impact Calculator:</h6>
+                            <p>Slide to see what happens over time:</p>
+                            <input type="range" class="form-range" id="embargoMonths" min="0" max="15" value="0" step="1">
+                            <div class="text-center">
+                                <strong>Months of Embargo: <span id="monthsDisplay">0</span></strong>
+                            </div>
+                            <div id="embargoImpact" class="mt-3"></div>
+                        </div>
+
+                        <div class="alert alert-warning mt-4">
+                            <h5>🤔 The Question:</h5>
+                            <p class="mb-0">Will economic pressure work, or will it backfire?</p>
+                            <button class="btn btn-info mt-2" onclick="revealEmbargoResult()">See What Actually Happened →</button>
+                            <div id="embargoResult" style="display: none;" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-card">
+                        <h4>📚 Embargo Act (1807)</h4>
+                        <p><strong>Passed:</strong> December 22, 1807</p>
+                        <p><strong>Duration:</strong> 15 months (ended March 1809)</p>
+                        
+                        <h5 class="mt-3">What It Did:</h5>
+                        <ul class="small">
+                            <li>Banned ALL American ships from foreign trade</li>
+                            <li>Closed all American ports to foreign ships</li>
+                            <li>Aimed to hurt Britain economically</li>
+                        </ul>
+                        
+                        <h5 class="mt-3">Jefferson's Logic:</h5>
+                        <p class="small">"Britain needs our raw materials and markets. If we cut them off, they'll have to negotiate!"</p>
+                        
+                        <h5 class="mt-3">What Went Wrong:</h5>
+                        <ul class="small">
+                            <li>Britain found other suppliers (South America)</li>
+                            <li>American economy collapsed instead</li>
+                            <li>Smuggling became rampant</li>
+                            <li>New England furious (economy based on trade)</li>
+                            <li>Jefferson called a "tyrant" for enforcement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 3: War of 1812 Timeline -->
+        <div class="learning-module mb-5">
+            <h2 class="module-title">⚔️ War of 1812: America's Second War for Independence</h2>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="simulator-box">
+                        <h4>Interactive War Timeline</h4>
+                        
+                        <div class="war-timeline">
+                            <div class="timeline-item" onclick="showWarEvent('causes')">
+                                <div class="timeline-year">1812</div>
+                                <div class="timeline-title">War Declared (June 18)</div>
+                                <div class="timeline-desc">Congress votes for war</div>
+                            </div>
+                            
+                            <div class="timeline-item" onclick="showWarEvent('early')">
+                                <div class="timeline-year">1812-1813</div>
+                                <div class="timeline-title">Early Disasters</div>
+                                <div class="timeline-desc">U.S. loses battles, Detroit surrenders</div>
+                            </div>
+                            
+                            <div class="timeline-item" onclick="showWarEvent('burning')">
+                                <div class="timeline-year">1814</div>
+                                <div class="timeline-title">British Burn Washington</div>
+                                <div class="timeline-desc">White House, Capitol destroyed</div>
+                            </div>
+                            
+                            <div class="timeline-item" onclick="showWarEvent('baltimore')">
+                                <div class="timeline-year">Sept 1814</div>
+                                <div class="timeline-title">Fort McHenry Holds</div>
+                                <div class="timeline-desc">"Star-Spangled Banner" written</div>
+                            </div>
+                            
+                            <div class="timeline-item" onclick="showWarEvent('ghent')">
+                                <div class="timeline-year">Dec 1814</div>
+                                <div class="timeline-title">Treaty of Ghent</div>
+                                <div class="timeline-desc">Peace treaty signed</div>
+                            </div>
+                            
+                            <div class="timeline-item" onclick="showWarEvent('neworleans')">
+                                <div class="timeline-year">Jan 1815</div>
+                                <div class="timeline-title">Battle of New Orleans</div>
+                                <div class="timeline-desc">Jackson's victory (after peace!)</div>
+                            </div>
+                        </div>
+
+                        <div id="warEventDetail" class="war-detail-box mt-4" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 4: Treaty of Ghent & Monroe Doctrine -->
+        <div class="learning-module mb-5">
+            <h2 class="module-title">🕊️ Peace & New Confidence</h2>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="treaty-box">
+                        <h4>Treaty of Ghent (1814)</h4>
+                        <p><strong>"Status Quo Ante Bellum"</strong> - Return to how things were before the war</p>
+                        
+                        <h5>What Was Decided:</h5>
+                        <ul>
+                            <li>❌ No mention of impressment (U.S. demand)</li>
+                            <li>❌ No territory changes</li>
+                            <li>❌ No reparations</li>
+                            <li>✅ War ends, peace restored</li>
+                        </ul>
+                        
+                        <div class="alert alert-info">
+                            <strong>So who won?</strong> Technically a draw! But Americans FELT like winners because:
+                            <ul class="mb-0 small">
+                                <li>Survived war with Britain again</li>
+                                <li>Jackson's victory at New Orleans (even though it was after peace)</li>
+                                <li>National pride surged</li>
+                                <li>Britain stopped impressment (not mentioned in treaty, but it ended)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="doctrine-box">
+                        <h4>Monroe Doctrine (1823)</h4>
+                        <p><strong>America's Bold Declaration to Europe</strong></p>
+                        
+                        <div class="doctrine-points">
+                            <div class="doctrine-point">
+                                <strong>1. No New Colonies:</strong>
+                                <p class="small">Europe cannot establish new colonies in the Americas</p>
+                            </div>
+                            <div class="doctrine-point">
+                                <strong>2. No Interference:</strong>
+                                <p class="small">Europe must stay out of Latin American independence movements</p>
+                            </div>
+                            <div class="doctrine-point">
+                                <strong>3. U.S. Stays Out of Europe:</strong>
+                                <p class="small">America won't interfere in European affairs</p>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-success">
+                            <strong>Why This Was Bold:</strong> America was still weak! But Britain's navy backed it (unofficially). This showed American confidence after War of 1812.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="room-summary">
+            <h3>🎯 European Relations Summary</h3>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="summary-point">
+                        <h5>⚓ Impressment</h5>
+                        <p>10,000+ Americans forced into British Navy. Main cause of War of 1812.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="summary-point">
+                        <h5>🚢 Embargo Act</h5>
+                        <p>Jefferson's failed experiment. Hurt America more than Britain!</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="summary-point">
+                        <h5>⚔️ War of 1812</h5>
+                        <p>Drew militarily, but won psychologically. "Second War of Independence."</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="summary-point">
+                        <h5>🌎 Monroe Doctrine</h5>
+                        <p>Bold statement: Americas off-limits to Europe. Still influential today!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="room-navigation mt-5">
+            <a href="/learn/federal" class="btn btn-outline-secondary btn-lg">← Federal Power Room</a>
+            <a href="/learn" class="btn btn-custom btn-lg">Back to Learn Menu</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.room-header {
+    padding: 3rem 2rem;
+    border-radius: 20px;
+}
+
+.room-icon-large {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.learning-module {
+    background: white;
+    border: 3px solid var(--sepia);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.module-title {
+    font-family: var(--font-display);
+    color: var(--sepia);
+    border-bottom: 3px solid #10b981;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.simulator-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.scenario-box {
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.impressment-demo {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #dc2626;
+}
+
+.stats-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #10b981;
+}
+
+.stat-card {
+    background: #f0fdf4;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid #10b981;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #059669;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #065f46;
+}
+
+.info-card {
+    background: #d1fae5;
+    border: 3px solid #10b981;
+    border-radius: 15px;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.problem-box {
+    background: #fee2e2;
+    border: 2px solid #dc2626;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.embargo-calculator {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #f59e0b;
+}
+
+.war-timeline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+.timeline-item {
+    background: white;
+    border: 3px solid #10b981;
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1 1 150px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.timeline-item:hover {
+    background: #10b981;
+    color: white;
+    transform: scale(1.05);
+}
+
+.timeline-year {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #059669;
+}
+
+.timeline-item:hover .timeline-year {
+    color: white;
+}
+
+.timeline-title {
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.timeline-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.war-detail-box {
+    background: #f0fdf4;
+    border: 3px solid #10b981;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.treaty-box, .doctrine-box {
+    background: #f8f9fa;
+    border: 3px solid #10b981;
+    padding: 1.5rem;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.doctrine-points {
+    margin: 1rem 0;
+}
+
+.doctrine-point {
+    background: white;
+    padding: 1rem;
+    border-left: 4px solid #10b981;
+    margin-bottom: 0.75rem;
+    border-radius: 5px;
+}
+
+.room-summary {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border: 3px solid #10b981;
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.summary-point {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: 100%;
+    border: 2px solid var(--sepia);
+}
+
+.room-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .war-timeline {
+        flex-direction: column;
+    }
+    
+    .timeline-item {
+        max-width: 100%;
+    }
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/european-room.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}Political Party Sorter - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Game Header -->
+        <div class="game-header text-center mb-4">
+            <h1 class="display-4">🗳️ Political Party Sorter</h1>
+            <p class="lead">Swipe issues left for Federalists, right for Democratic-Republicans!</p>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-bar mb-4">
+            <div class="row text-center">
+                <div class="col-4">
+                    <div class="score-box federalist-score">
+                        <h3>🔵 Federalists</h3>
+                        <div class="score" id="federalistScore">0</div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="score-box">
+                        <h5>Streak</h5>
+                        <div class="streak" id="streak">0</div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="score-box democratic-score">
+                        <h3>🔴 D-Rs</h3>
+                        <div class="score" id="democraticScore">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Card -->
+        <div class="game-container">
+            <div id="cardStack" class="card-stack">
+                <!-- Cards will be generated here -->
+            </div>
+            
+            <div id="gameComplete" class="game-complete" style="display: none;">
+                <h2>🎉 Game Complete!</h2>
+                <p id="finalScore"></p>
+                <button class="btn btn-custom btn-lg" onclick="restartGame()">Play Again</button>
+                <a href="/games" class="btn btn-outline-secondary btn-lg">Back to Games</a>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls mt-4">
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <button class="btn btn-danger btn-lg control-btn" onclick="swipeCard('federalist')">
+                        ← Federalist
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-info btn-lg control-btn" onclick="swipeCard('democratic')">
+                        Democratic-Republican →
+                    </button>
+                </div>
+            </div>
+            <p class="text-center mt-3 text-muted">
+                <small>Or use arrow keys: ← for Federalist, → for Democratic-Republican</small>
+            </p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions mt-5">
+            <h4>📋 How to Play:</h4>
+            <ol>
+                <li>Read the issue or policy on each card</li>
+                <li>Decide which party would SUPPORT this position</li>
+                <li>Swipe left (Federalist) or right (Democratic-Republican)</li>
+                <li>Get feedback and build your streak!</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<style>
+.game-header {
+    background: linear-gradient(135deg, var(--federalist-primary), var(--democratic-primary));
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.score-bar {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.score-box {
+    padding: 1rem;
+}
+
+.federalist-score {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border-radius: 10px;
+}
+
+.democratic-score {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    border-radius: 10px;
+}
+
+.score {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--sepia);
+}
+
+.streak {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f59e0b;
+}
+
+.game-container {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-stack {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+}
+
+.issue-card {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 4px solid var(--sepia);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    cursor: grab;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    text-align: center;
+}
+
+.issue-card:active {
+    cursor: grabbing;
+}
+
+.issue-card h3 {
+    font-family: var(--font-display);
+    color: var(--sepia);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.issue-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.issue-card.swiping-left {
+    transform: translateX(-200px) rotate(-15deg);
+    opacity: 0;
+}
+
+.issue-card.swiping-right {
+    transform: translateX(200px) rotate(15deg);
+    opacity: 0;
+}
+
+.feedback-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    font-weight: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.feedback-overlay.show {
+    opacity: 1;
+}
+
+.game-complete {
+    text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 4px solid #10b981;
+}
+
+.controls {
+    text-align: center;
+}
+
+.control-btn {
+    min-width: 200px;
+}
+
+.instructions {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid var(--sepia);
+}
+
+@media (max-width: 768px) {
+    .issue-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .issue-card h3 {
+        font-size: 1.4rem;
+    }
+    
+    .control-btn {
+        min-width: 150px;
+        font-size: 0.9rem;
+    }
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/game1-sorter.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

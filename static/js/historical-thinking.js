@@ -11,7 +11,7 @@ const changeData = {
         changed: [],
         continued: [
             "Two major political parties competing for power",
-            "Debates over how much power federal government should have",
+            "Debates over how much power federal government should have and how much the state can have",
             "Arguments about interpreting the Constitution",
             "Tensions with European powers (Britain and France)"
         ],
@@ -53,7 +53,7 @@ const changeData = {
             "Debates about federal power during crisis",
             "Americans divided by region and party"
         ],
-        analysis: "War of 1812 tested whether the young nation could survive conflict with a superpower. It sparked intense nationalism but also dangerous divisions."
+        analysis: "War of 1812 tested whether the young nation could survive conflict with a superpower. It sparked intense nationalism but also dangerous divisions. American identity really came into fruition during the war."
     },
     1815: {
         changed: [
@@ -67,7 +67,7 @@ const changeData = {
             "Economic policy debates continued",
             "Western expansion continued"
         ],
-        analysis: "Though the war ended in a draw, Americans celebrated it as a victory. The Federalists' opposition discredited them forever."
+        analysis: "Though the war ended in a draw, Americans celebrated it as a victory. The Federalists' opposition discredited them forever. After the Hartford Convention, in which federalitst proposed ideas such as a one term presdiency, they were discredited and fell out of favor with the American public. "
     },
     1823: {
         changed: [
@@ -81,7 +81,7 @@ const changeData = {
             "Still concerned about European interference",
             "Still expanding westward"
         ],
-        analysis: "By 1823, America was more confident and powerful. The Monroe Doctrine boldly told European empires to stay out of the Americas."
+        analysis: "By 1823, America was more confident and powerful. The Monroe Doctrine boldly told European empires to stay out of the Americas. Becuase the European powers respected the US's claim on South America, its showed that the Europeans respected America as an powerful nation. This meant that America was seen as a country worth respecting."
     },
     1825: {
         changed: [
@@ -97,7 +97,7 @@ const changeData = {
             "Still tensions over slavery (though not yet critical)",
             "Constitutional interpretation still controversial"
         ],
-        analysis: "The Early Republic period transformed America from a fragile experiment into a confident nation, but the fundamental debates about power and rights continued."
+        analysis: "The Early Republic period transformed America from a fragile experiment into a confident nation, but the fundamental debates about power and rights continued. Issues such as how much power the Government was Granted through the Elastic clause as well as debates on the morality of slavery were prevalent throughout the Nation."
     }
 };
 

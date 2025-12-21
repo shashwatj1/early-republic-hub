@@ -1,0 +1,440 @@
+{% extends "base.html" %}
+
+{% block title %}Federal Power Room - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Room Header -->
+        <div class="room-header text-center mb-5" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+            <div class="room-icon-large">⚖️</div>
+            <h1 class="display-3 fw-bold" style="font-family: var(--font-display); color: white;">
+                FEDERAL POWER ROOM
+            </h1>
+            <p class="lead text-white">Discover debates over constitutional interpretation</p>
+            <div class="breadcrumb-nav">
+                <a href="/" style="color: white;">Home</a> → <a href="/learn" style="color: white;">Learn</a> → Federal Power
+            </div>
+        </div>
+
+        <!-- Terms in This Room -->
+        <div class="alert alert-info mb-5">
+            <h4>📋 Terms You'll Learn:</h4>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-primary">Elastic Clause</span>
+                <span class="badge bg-primary">Louisiana Purchase</span>
+                <span class="badge bg-primary">Hartford Convention</span>
+            </div>
+        </div>
+
+        <!-- Module 1: Elastic Clause Debate -->
+        <div class="learning-module mb-5">
+            <h2 class="module-title">📜 Constitution Debate Simulator</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="simulator-box">
+                        <h4>The Elastic Clause Controversy</h4>
+                        <p class="text-muted">Article I, Section 8: "To make all Laws which shall be necessary and proper..."</p>
+                        
+                        <!-- Constitution Text -->
+                        <div class="constitution-text">
+                            <p class="fst-italic">"The Congress shall have Power... To make all Laws which shall be <strong>necessary and proper</strong> for carrying into Execution the foregoing Powers..."</p>
+                        </div>
+
+                        <!-- Interpretation Buttons -->
+                        <h5 class="mt-4">How do you interpret "necessary and proper"?</h5>
+                        <div class="interpretation-buttons">
+                            <button class="btn btn-lg interpretation-btn" onclick="showInterpretation('strict')">
+                                <strong>Strict Interpretation</strong><br>
+                                <small>Only what's explicitly listed</small>
+                            </button>
+                            <button class="btn btn-lg interpretation-btn" onclick="showInterpretation('loose')">
+                                <strong>Loose Interpretation</strong><br>
+                                <small>Flexibility for implied powers</small>
+                            </button>
+                        </div>
+
+                        <!-- Results -->
+                        <div id="interpretationResult" style="display: none;" class="mt-4"></div>
+
+                        <!-- Real-World Example -->
+                        <div class="example-box mt-4">
+                            <h5>🏦 Real Example: National Bank (1791)</h5>
+                            <p><strong>Hamilton's Question:</strong> Can Congress create a national bank?</p>
+                            <ul>
+                                <li><strong>Constitution says:</strong> Congress can coin money and regulate commerce</li>
+                                <li><strong>Doesn't say:</strong> Congress can create banks</li>
+                            </ul>
+                            <button class="btn btn-warning" onclick="showBankDebate()">See the Debate →</button>
+                            <div id="bankDebate" style="display: none;" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-card">
+                        <h4>📚 Elastic Clause</h4>
+                        <p><strong>Also called:</strong> "Necessary and Proper Clause"</p>
+                        <p><strong>Location:</strong> Article I, Section 8</p>
+                        
+                        <h5 class="mt-3">The Two Views:</h5>
+                        <div class="party-view mb-2">
+                            <strong>🔵 Federalists (Hamilton):</strong>
+                            <p class="small">"Necessary" = convenient or useful. This gives Congress flexibility to do whatever helps execute its powers.</p>
+                        </div>
+                        <div class="party-view">
+                            <strong>🔴 Democratic-Republicans (Jefferson):</strong>
+                            <p class="small">"Necessary" = absolutely essential. Congress can only do what's explicitly listed in Constitution.</p>
+                        </div>
+                        
+                        <div class="alert alert-warning mt-3">
+                            <strong>Why This Matters:</strong> This debate about federal power continues TODAY! Every argument about "big government vs small government" traces back to this.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 2: Louisiana Purchase Dilemma -->
+        <div class="learning-module mb-5">
+            <h2 class="module-title">🗺️ Jefferson's Dilemma: Louisiana Purchase</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="simulator-box">
+                        <h4>You are Thomas Jefferson (1803)</h4>
+                        
+                        <div class="scenario-box">
+                            <h5>🚨 THE SITUATION:</h5>
+                            <p>Napoleon offers to sell ALL of Louisiana Territory for $15 million!</p>
+                            <ul>
+                                <li>✅ Would DOUBLE the size of the United States</li>
+                                <li>✅ Secures access to New Orleans (critical port)</li>
+                                <li>✅ Removes France from North America</li>
+                                <li>❌ Constitution doesn't give President power to buy territory</li>
+                                <li>❌ You've always preached "strict interpretation"</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="mt-4">What do you do?</h5>
+                        <div class="choice-grid">
+                            <div class="choice-card" onclick="makeChoice('buy')">
+                                <h6>Buy It Anyway</h6>
+                                <p class="small">Opportunity too good to pass up</p>
+                            </div>
+                            <div class="choice-card" onclick="makeChoice('refuse')">
+                                <h6>Refuse the Deal</h6>
+                                <p class="small">Stay true to strict interpretation</p>
+                            </div>
+                            <div class="choice-card" onclick="makeChoice('amendment')">
+                                <h6>Seek Constitutional Amendment</h6>
+                                <p class="small">Do it the "right" way</p>
+                            </div>
+                        </div>
+
+                        <div id="choiceResult" style="display: none;" class="mt-4"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-card">
+                        <h4>📚 Louisiana Purchase</h4>
+                        <p><strong>Year:</strong> 1803</p>
+                        <p><strong>Price:</strong> $15 million (~$250M today)</p>
+                        <p><strong>Size:</strong> 827,000 square miles</p>
+                        
+                        <h5 class="mt-3">The Irony:</h5>
+                        <p class="small">Jefferson, who always argued for strict Constitutional interpretation, bought Louisiana using a <em>loose</em> interpretation!</p>
+                        
+                        <h5 class="mt-3">Party Reactions:</h5>
+                        <div class="party-view mb-2">
+                            <strong>🔵 Federalists:</strong>
+                            <p class="small">Opposed! "Constitution doesn't allow this!" Also worried about Western expansion weakening their power.</p>
+                        </div>
+                        <div class="party-view">
+                            <strong>🔴 D-Rs:</strong>
+                            <p class="small">Supported despite contradiction. Deal was too good!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 3: Hartford Convention -->
+        <div class="learning-module mb-5">
+            <h2 class="module-title">🏛️ Hartford Convention: Federalist Last Stand</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="simulator-box">
+                        <h4>December 1814: New England Federalists Meet in Secret</h4>
+                        
+                        <div class="timeline-context">
+                            <h5>What's Happening:</h5>
+                            <ul>
+                                <li>War of 1812 is going badly</li>
+                                <li>British burning Washington D.C.</li>
+                                <li>New England economy devastated (no trade with Britain)</li>
+                                <li>Federalists furious at Democratic-Republican war policy</li>
+                            </ul>
+                        </div>
+
+                        <h5 class="mt-4">The Federalists Propose:</h5>
+                        <div class="proposals-list">
+                            <div class="proposal-item">
+                                <strong>1. Require 2/3 majority to declare war</strong>
+                                <p class="small">Would make it harder for D-Rs to start wars</p>
+                            </div>
+                            <div class="proposal-item">
+                                <strong>2. Limit presidents to one term</strong>
+                                <p class="small">Stop Democratic-Republican dynasties (Jefferson → Madison → Monroe)</p>
+                            </div>
+                            <div class="proposal-item">
+                                <strong>3. End three-fifths compromise</strong>
+                                <p class="small">Stop South from getting extra representation from enslaved people</p>
+                            </div>
+                            <div class="proposal-item">
+                                <strong>4. Require 2/3 majority to admit new states</strong>
+                                <p class="small">Prevent Western states from diluting New England's power</p>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-danger mt-4">
+                            <h5>⚠️ What Actually Happened:</h5>
+                            <p>Right as delegates arrived in Washington with their demands, news broke that:</p>
+                            <ul class="mb-0">
+                                <li>Andrew Jackson won huge victory at Battle of New Orleans</li>
+                                <li>Treaty of Ghent signed - war was over!</li>
+                            </ul>
+                            <p class="mt-2"><strong>Result:</strong> Federalists looked unpatriotic for meeting during war. Party never recovered and died within a few years!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-card">
+                        <h4>📚 Hartford Convention</h4>
+                        <p><strong>When:</strong> Dec 15, 1814 - Jan 5, 1815</p>
+                        <p><strong>Where:</strong> Hartford, Connecticut</p>
+                        <p><strong>Who:</strong> Federalist delegates from New England</p>
+                        
+                        <h5 class="mt-3">Why It Matters:</h5>
+                        <p class="small">Marked the END of the Federalist Party as a national force.</p>
+                        
+                        <h5 class="mt-3">The Timing Was Terrible:</h5>
+                        <p class="small">They wanted constitutional amendments to limit federal power, but arrived in DC right when:</p>
+                        <ol class="small">
+                            <li>War ended successfully</li>
+                            <li>Nation was celebrating victory</li>
+                        </ol>
+                        <p class="small">Made them look like traitors!</p>
+                        
+                        <div class="alert alert-info mt-3">
+                            <strong>Connection:</strong> Federalists' opposition to federal power during war ironically killed their party, leaving D-Rs to expand federal power unchecked!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="room-summary">
+            <h3>🎯 Federal Power Summary</h3>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="summary-point">
+                        <h5>📜 Elastic Clause</h5>
+                        <p><strong>The Debate:</strong> Does "necessary and proper" mean flexibility or strict limits?</p>
+                        <p><strong>Still matters:</strong> Every modern debate about federal power traces back to this!</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="summary-point">
+                        <h5>🗺️ Louisiana Purchase</h5>
+                        <p><strong>The Irony:</strong> Jefferson abandoned his principles to double nation's size.</p>
+                        <p><strong>Shows:</strong> Sometimes pragmatism beats ideology!</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="summary-point">
+                        <h5>🏛️ Hartford Convention</h5>
+                        <p><strong>The End:</strong> Federalist Party's death after opposing War of 1812.</p>
+                        <p><strong>Result:</strong> One-party rule ("Era of Good Feelings")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="room-navigation mt-5">
+            <a href="/learn/economic" class="btn btn-outline-secondary btn-lg">← Economic Room</a>
+            <a href="/learn/european" class="btn btn-custom btn-lg">Next: European Relations →</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.room-header {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+}
+
+.room-icon-large {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.learning-module {
+    background: white;
+    border: 3px solid var(--sepia);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.module-title {
+    font-family: var(--font-display);
+    color: var(--sepia);
+    border-bottom: 3px solid #8b5cf6;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.simulator-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.constitution-text {
+    background: #fffbeb;
+    border-left: 5px solid #f59e0b;
+    padding: 1.5rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+.interpretation-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.interpretation-btn {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    border: 3px solid var(--sepia);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.interpretation-btn:hover {
+    background: var(--sepia);
+    color: white;
+    transform: translateY(-5px);
+}
+
+.example-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #3b82f6;
+}
+
+.info-card {
+    background: #ede9fe;
+    border: 3px solid #8b5cf6;
+    border-radius: 15px;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.party-view {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #8b5cf6;
+}
+
+.scenario-box {
+    background: #fef3c7;
+    border: 3px solid #f59e0b;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.choice-card {
+    background: white;
+    border: 3px solid var(--sepia);
+    border-radius: 10px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.choice-card:hover {
+    background: var(--sepia);
+    color: white;
+    transform: scale(1.05);
+}
+
+.timeline-context {
+    background: #fee2e2;
+    border: 2px solid #dc2626;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.proposals-list {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.proposal-item {
+    padding: 1rem;
+    border-left: 4px solid #8b5cf6;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.room-summary {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+    border: 3px solid #8b5cf6;
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.summary-point {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: 100%;
+    border: 2px solid var(--sepia);
+}
+
+.room-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/federal-room.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

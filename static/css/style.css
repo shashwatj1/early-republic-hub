@@ -150,7 +150,7 @@ body {
     z-index: 2;
     text-align: center;
     color: white;
-    animation: fadeInUp 1s ease;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 .party-icon {
@@ -186,10 +186,11 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 10;
     width: 90%;
     max-width: 800px;
+    /* Don't set transform here - it's in the animation */
+    animation: fadeInScale 0.8s ease forwards;
 }
 
 .debate-content {
@@ -199,7 +200,6 @@ body {
     padding: 3rem 2rem;
     backdrop-filter: blur(10px);
     box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    animation: fadeInScale 1.2s ease;
 }
 
 .hero-title {
@@ -233,12 +233,7 @@ body {
     font-weight: 700;
     font-size: 1.1rem;
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.debate-badge:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+    /* Removed hover effects - these are just labels, not buttons */
 }
 
 /* Buttons */
@@ -377,16 +372,8 @@ body {
     text-align: center;
     font-weight: 600;
     font-size: 0.95rem;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    cursor: pointer;
-}
-
-.term-badge:hover {
-    background: linear-gradient(135deg, #d4af37, #f7dc6f);
-    color: #000;
-    border-color: #d4af37;
-    transform: scale(1.05);
+    border: 2px solid #34495e;
+    /* Removed hover/cursor effects - these aren't clickable */
 }
 
 /* ========================================
@@ -402,13 +389,8 @@ body {
     border-radius: 15px;
     padding: 1.5rem;
     text-align: center;
-    transition: all 0.3s ease;
     height: 100%;
-}
-
-.skill-preview:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    /* Removed hover effects - there's a button below these cards */
 }
 
 .skill-preview-icon {
@@ -438,11 +420,11 @@ body {
 }
 
 @keyframes fadeInScale {
-    from {
+    0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
+        transform: translate(-50%, -50%) scale(0.9);
     }
-    to {
+    100% {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
     }
