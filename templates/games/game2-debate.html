@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}Great Debate - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Game Header -->
+        <div class="game-header text-center mb-4">
+            <h1 class="display-4">🎤 The Great Debate</h1>
+            <p class="lead">Argue like Hamilton or Jefferson!</p>
+        </div>
+
+        <!-- Character Selection -->
+        <div id="characterSelect" class="character-select">
+            <h3 class="text-center mb-4">Choose Your Side:</h3>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="character-card federalist-card" onclick="selectCharacter('federalist')">
+                        <div class="character-icon">🔵</div>
+                        <h3>Alexander Hamilton</h3>
+                        <h4>Federalist</h4>
+                        <p>Argue for strong federal government, national bank, and tariffs</p>
+                        <button class="btn btn-primary btn-lg">Choose Federalist</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="character-card democratic-card" onclick="selectCharacter('democratic')">
+                        <div class="character-icon">🔴</div>
+                        <h3>Thomas Jefferson</h3>
+                        <h4>Democratic-Republican</h4>
+                        <p>Argue for states' rights, strict Constitution, and limited government</p>
+                        <button class="btn btn-danger btn-lg">Choose D-R</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Debate Game -->
+        <div id="debateGame" style="display: none;">
+            <!-- Round Display -->
+            <div class="round-display text-center mb-4">
+                <h3>Round <span id="roundNumber">1</span> of 3</h3>
+                <h4 id="topicTitle"></h4>
+            </div>
+
+            <!-- Debate Arena -->
+            <div class="debate-arena">
+                <div class="row">
+                    <!-- Your Side -->
+                    <div class="col-md-6">
+                        <div class="debater-box your-side">
+                            <h4 id="yourCharacter"></h4>
+                            <div class="arguments-list" id="yourArguments"></div>
+                        </div>
+                    </div>
+
+                    <!-- Opponent Side -->
+                    <div class="col-md-6">
+                        <div class="debater-box opponent-side">
+                            <h4 id="opponentCharacter"></h4>
+                            <div class="arguments-list" id="opponentArguments"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Argument Choices -->
+            <div class="argument-choices mt-4" id="argumentChoices">
+                <h5>Choose your argument:</h5>
+                <div id="choiceButtons"></div>
+            </div>
+
+            <!-- Results -->
+            <div id="roundResult" class="round-result mt-4" style="display: none;"></div>
+        </div>
+
+        <!-- Final Results -->
+        <div id="finalResults" class="final-results" style="display: none;">
+            <h2 class="text-center">🏆 Debate Complete!</h2>
+            <div id="finalScore"></div>
+            <div class="text-center mt-4">
+                <button class="btn btn-custom btn-lg" onclick="restartDebate()">Debate Again</button>
+                <a href="/games" class="btn btn-outline-secondary btn-lg">Back to Games</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.game-header {
+    background: linear-gradient(135deg, #1e3a8a, #991b1b);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.character-select {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.character-card {
+    background: white;
+    border: 4px solid var(--sepia);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.character-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.federalist-card {
+    border-color: var(--federalist-primary);
+}
+
+.federalist-card:hover {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.democratic-card {
+    border-color: var(--democratic-primary);
+}
+
+.democratic-card:hover {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+}
+
+.character-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.round-display {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.debate-arena {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.debater-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    min-height: 300px;
+}
+
+.your-side {
+    border: 3px solid #10b981;
+}
+
+.opponent-side {
+    border: 3px solid #ef4444;
+}
+
+.arguments-list {
+    margin-top: 1rem;
+}
+
+.argument-item {
+    background: #f8f9fa;
+    border-left: 4px solid #10b981;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 5px;
+    animation: slideIn 0.5s ease;
+}
+
+.opponent-argument {
+    border-left-color: #ef4444;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.argument-choices {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.choice-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: white;
+    border: 3px solid var(--sepia);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.choice-btn:hover {
+    background: var(--sepia);
+    color: white;
+    transform: translateX(10px);
+}
+
+.round-result {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid #f59e0b;
+}
+
+.final-results {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 4px solid #10b981;
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/game2-debate.js') }}"></script>
+{% endblock %}
+
+{% endblock %}
