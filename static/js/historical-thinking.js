@@ -1,5 +1,6 @@
 // ========================================
 // HISTORICAL THINKING SKILLS - JAVASCRIPT
+// Your analysis + All bug fixes merged
 // ========================================
 
 // ========================================
@@ -147,6 +148,7 @@ function updateChangeDisplay(year) {
 // ========================================
 
 const causeEffectChains = {
+    "British Impressment of American Sailors": ["Embargo Act (1807)", "War of 1812", "American Anger"],
     "Embargo Act (1807)": ["Economic Depression", "Smuggling", "War of 1812"],
     "Economic Depression": ["Political Backlash", "War of 1812"],
     "Smuggling": ["Jefferson Expands Powers", "War of 1812"],
@@ -175,7 +177,7 @@ function initializeCauseEffect() {
     
     eventBank.innerHTML = events.map(event => `
         <div class="col-md-4 col-lg-3">
-            <div class="event-card" onclick="addToChain('${event}')">
+            <div class="event-card" onclick="addToChain('${event.replace(/'/g, "\\'")}')">
                 ${event}
             </div>
         </div>
@@ -193,7 +195,10 @@ function addToChain(event) {
     const chainDisplay = document.getElementById('chainDisplay');
     const chainItem = document.createElement('div');
     chainItem.className = `chain-item ${isCorrect ? 'correct' : 'incorrect'}`;
-    chainItem.textContent = event;
+    chainItem.innerHTML = `
+        ${event}
+        <button class="remove-chain-btn" onclick="removeFromChain(${currentChain.length - 1})" title="Remove">✕</button>
+    `;
     chainDisplay.appendChild(chainItem);
     
     // Mark event as used
@@ -209,6 +214,42 @@ function addToChain(event) {
     } else {
         showNotification(`❌ Hmm, that's not quite right. But keep building your chain!`, 'warning');
     }
+}
+
+function removeFromChain(index) {
+    if (index === 0) return; // Can't remove the start event
+    
+    // Remove from current chain array
+    const removedEvent = currentChain[index];
+    currentChain.splice(index, 1);
+    
+    // Rebuild the display
+    const chainDisplay = document.getElementById('chainDisplay');
+    chainDisplay.innerHTML = '<div class="chain-start">START: British Impressment of American Sailors</div>';
+    
+    // Re-add all remaining items
+    for (let i = 1; i < currentChain.length; i++) {
+        const event = currentChain[i];
+        const lastEvent = currentChain[i - 1];
+        const validNextEvents = causeEffectChains[lastEvent] || correctChains[lastEvent] || [];
+        const isCorrect = validNextEvents.includes(event);
+        
+        const chainItem = document.createElement('div');
+        chainItem.className = `chain-item ${isCorrect ? 'correct' : 'incorrect'}`;
+        chainItem.innerHTML = `
+            ${event}
+            <button class="remove-chain-btn" onclick="removeFromChain(${i})" title="Remove">✕</button>
+        `;
+        chainDisplay.appendChild(chainItem);
+    }
+    
+    // Unmark the removed event card
+    const eventCards = document.querySelectorAll('.event-card');
+    eventCards.forEach(card => {
+        if (card.textContent.trim() === removedEvent && !currentChain.includes(removedEvent)) {
+            card.classList.remove('used');
+        }
+    });
 }
 
 function resetChain() {
@@ -251,14 +292,14 @@ function showChainAnalysis() {
 const vennData = {
     "Elastic Clause": "federalist",
     "Tariff": "federalist",
-    "Louisiana Purchase": "both", // Both dealt with it
+    "Louisiana Purchase": "both",
     "Internal Taxes": "federalist",
     "Hartford Convention": "federalist",
-    "War of 1812": "both", // Both had positions
+    "War of 1812": "both",
     "Embargo Act": "democratic",
-    "Impressment": "both", // Both opposed it
+    "Impressment": "both",
     "Monroe Doctrine": "democratic",
-    "American System": "both" // D-Rs split on this
+    "American System": "both"
 };
 
 function initializeVennDiagram() {
@@ -300,16 +341,52 @@ function setupDragAndDrop() {
             const card = document.querySelector(`[data-term="${term}"]`);
             
             if (card && !card.classList.contains('placed')) {
-                const clone = card.cloneNode(true);
-                clone.classList.add('placed');
-                clone.style.margin = '0.5rem';
-                clone.style.cursor = 'default';
-                clone.draggable = false;
-                this.appendChild(clone);
+                // Create term element with remove button
+                const termElement = document.createElement('div');
+                termElement.className = 'dropped-term';
+                termElement.innerHTML = `
+                    ${term}
+                    <button class="remove-venn-btn" onclick="removeFromVenn(this, '${term}')" title="Remove">✕</button>
+                `;
+                this.appendChild(termElement);
+                
                 card.classList.add('placed');
+                card.style.border = '2px solid #10b981';
+                
+                // Auto-resize zone
+                adjustZoneSize(this);
             }
         });
     });
+}
+
+function removeFromVenn(button, term) {
+    // Remove the term element
+    button.parentElement.remove();
+    
+    // Show the card again
+    const card = document.querySelector(`[data-term="${term}"]`);
+    if (card) {
+        card.classList.remove('placed');
+        card.style.border = '2px solid var(--sepia)';
+    }
+    
+    // Adjust zone size
+    const zone = button.closest('.drop-zone');
+    if (zone) {
+        adjustZoneSize(zone);
+    }
+}
+
+function adjustZoneSize(zone) {
+    const termCount = zone.querySelectorAll('.dropped-term').length;
+    
+    // Expand zone vertically if needed
+    if (termCount > 2) {
+        zone.style.minHeight = `${120 + (termCount - 2) * 40}px`;
+    } else {
+        zone.style.minHeight = '120px';
+    }
 }
 
 function checkVennAnswers() {
@@ -324,22 +401,40 @@ function checkVennAnswers() {
     
     Object.entries(zones).forEach(([zoneId, zoneType]) => {
         const zone = document.getElementById(zoneId);
-        const cards = zone.querySelectorAll('.term-card');
+        if (!zone) {
+            console.error(`Zone not found: ${zoneId}`);
+            return;
+        }
         
-        cards.forEach(card => {
+        const droppedTerms = zone.querySelectorAll('.dropped-term');
+        
+        droppedTerms.forEach(termEl => {
             total++;
-            const term = card.dataset.term;
+            const term = termEl.textContent.trim().replace('✕', '').trim();
+            const card = document.querySelector(`[data-term="${term}"]`);
+            
             if (vennData[term] === zoneType) {
                 correct++;
-                card.style.border = '3px solid #10b981';
+                if (card) card.style.border = '3px solid #10b981';
             } else {
-                card.style.border = '3px solid #ef4444';
+                if (card) card.style.border = '3px solid #ef4444';
             }
         });
     });
     
     const resultsDiv = document.getElementById('vennResults');
-    const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
+    if (!resultsDiv) {
+        console.error('vennResults div not found!');
+        return;
+    }
+    
+    if (total === 0) {
+        resultsDiv.innerHTML = `<div class="alert alert-warning">Please place some terms in the Venn diagram first!</div>`;
+        resultsDiv.style.display = 'block';
+        return;
+    }
+    
+    const percentage = Math.round((correct / total) * 100);
     
     let message = `<h4>📊 Results: ${correct} out of ${total} correct (${percentage}%)</h4>`;
     
@@ -360,11 +455,15 @@ function checkVennAnswers() {
     
     resultsDiv.innerHTML = message;
     resultsDiv.style.display = 'block';
+    
+    // Scroll to results
+    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function resetVenn() {
     document.querySelectorAll('.drop-zone').forEach(zone => {
         zone.innerHTML = '';
+        zone.style.minHeight = '120px';
     });
     
     document.querySelectorAll('.term-card').forEach(card => {
@@ -420,6 +519,10 @@ const connections = [
     }
 ];
 
+let selectedAmericanEvent = null;
+let selectedWorldEvent = null;
+let userConnections = [];
+
 function initializeContextualization() {
     const americanDiv = document.getElementById('americanEvents');
     const worldDiv = document.getElementById('worldEvents');
@@ -427,18 +530,18 @@ function initializeContextualization() {
     
     if (!americanDiv) return;
     
-    // Display American events
+    // Display American events (clickable)
     americanDiv.innerHTML = americanEvents.map(e => `
-        <div class="timeline-event" data-year="${e.year}">
+        <div class="timeline-event clickable" data-year="${e.year}" onclick="selectAmericanEvent(${e.year})">
             <div class="year">${e.year}</div>
             <div><strong>${e.event}</strong></div>
             <div class="small">${e.explanation}</div>
         </div>
     `).join('');
     
-    // Display World events
+    // Display World events (clickable)
     worldDiv.innerHTML = worldEvents.map(e => `
-        <div class="timeline-event" data-year="${e.year}">
+        <div class="timeline-event clickable" data-year="${e.year}" onclick="selectWorldEvent(${e.year})">
             <div class="year">${e.year}</div>
             <div><strong>${e.event}</strong></div>
             <div class="small">${e.explanation}</div>
@@ -453,4 +556,60 @@ function initializeContextualization() {
             <em>${c.explanation}</em>
         </li>
     `).join('');
+}
+
+function selectAmericanEvent(year) {
+    // Clear previous selection
+    document.querySelectorAll('#americanEvents .timeline-event').forEach(el => {
+        el.classList.remove('selected');
+    });
+    
+    // Select this event
+    document.querySelector(`#americanEvents [data-year="${year}"]`).classList.add('selected');
+    selectedAmericanEvent = year;
+    
+    // Try to make connection if both selected
+    if (selectedWorldEvent !== null) {
+        makeConnection();
+    }
+}
+
+function selectWorldEvent(year) {
+    // Clear previous selection
+    document.querySelectorAll('#worldEvents .timeline-event').forEach(el => {
+        el.classList.remove('selected');
+    });
+    
+    // Select this event
+    document.querySelector(`#worldEvents [data-year="${year}"]`).classList.add('selected');
+    selectedWorldEvent = year;
+    
+    // Try to make connection if both selected
+    if (selectedAmericanEvent !== null) {
+        makeConnection();
+    }
+}
+
+function makeConnection() {
+    const connection = connections.find(c => 
+        c.american === selectedAmericanEvent && c.world === selectedWorldEvent
+    );
+    
+    if (connection) {
+        showNotification(`✅ Correct connection! ${connection.explanation}`, 'success');
+        userConnections.push(connection);
+        
+        // Mark as connected
+        document.querySelector(`#americanEvents [data-year="${selectedAmericanEvent}"]`).classList.add('connected');
+        document.querySelector(`#worldEvents [data-year="${selectedWorldEvent}"]`).classList.add('connected');
+    } else {
+        showNotification(`❌ These events aren't directly connected. Try different combinations!`, 'error');
+    }
+    
+    // Clear selections
+    document.querySelectorAll('.timeline-event').forEach(el => {
+        el.classList.remove('selected');
+    });
+    selectedAmericanEvent = null;
+    selectedWorldEvent = null;
 }

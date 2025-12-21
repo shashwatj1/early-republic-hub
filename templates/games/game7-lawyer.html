@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Constitutional Lawyer - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Game Header -->
+        <div class="game-header text-center mb-4">
+            <h1 class="display-4">⚖️ Constitutional Lawyer</h1>
+            <p class="lead">Argue constitutional cases like Hamilton and Jefferson!</p>
+        </div>
+
+        <!-- Case Display -->
+        <div id="caseDisplay" class="case-display">
+            <div class="case-header text-center mb-4">
+                <h2 id="caseTitle"></h2>
+                <p id="caseDescription"></p>
+            </div>
+
+            <div class="row">
+                <!-- Your Arguments -->
+                <div class="col-md-6">
+                    <h4>📝 Build Your Argument:</h4>
+                    <div id="argumentOptions"></div>
+                </div>
+
+                <!-- Evidence -->
+                <div class="col-md-6">
+                    <h4>📜 Selected Evidence:</h4>
+                    <div id="selectedEvidence" class="evidence-box"></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-custom btn-lg" id="presentBtn" onclick="presentCase()" disabled>
+                    Present Your Case to the Court
+                </button>
+            </div>
+        </div>
+
+        <!-- Verdict -->
+        <div id="verdict" class="verdict" style="display: none;"></div>
+
+        <!-- Controls -->
+        <div class="text-center mt-4">
+            <button class="btn btn-warning btn-lg" onclick="nextCase()">Next Case →</button>
+            <a href="/games" class="btn btn-outline-secondary btn-lg">Back to Games</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.game-header {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.case-display {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 4px solid var(--sepia);
+}
+
+.case-header {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 2px solid var(--sepia);
+}
+
+#argumentOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.argument-option {
+    background: white;
+    border: 3px solid var(--sepia);
+    padding: 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.argument-option:hover {
+    background: #fef3c7;
+    transform: scale(1.02);
+}
+
+.argument-option.selected {
+    background: #d1fae5;
+    border-color: #10b981;
+}
+
+.evidence-box {
+    background: #f8f9fa;
+    border: 3px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 2rem;
+    min-height: 300px;
+}
+
+.evidence-item {
+    background: white;
+    border-left: 4px solid #f59e0b;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.verdict {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 4px solid #10b981;
+    margin-top: 2rem;
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/game7-lawyer.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

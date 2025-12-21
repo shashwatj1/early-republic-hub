@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Triple Match - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Game Header -->
+        <div class="game-header text-center mb-4">
+            <h1 class="display-4">🎯 Triple Match</h1>
+            <p class="lead">Connect Terms → Parties → Categories!</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="alert alert-info mb-4">
+            <strong>📋 How to Play:</strong> Click a term, then click the party that supported it, then click the category it belongs to. Get all connections right!
+        </div>
+
+        <!-- Score -->
+        <div class="score-bar text-center mb-4">
+            <h3>Score: <span id="score">0</span> / <span id="total">10</span></h3>
+            <div class="progress mt-2" style="height: 30px;">
+                <div class="progress-bar bg-success" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board">
+            <div class="row g-4">
+                <!-- Column 1: Terms -->
+                <div class="col-md-4">
+                    <h4 class="text-center mb-3">📝 Terms</h4>
+                    <div class="column-container" id="termsColumn"></div>
+                </div>
+
+                <!-- Column 2: Parties -->
+                <div class="col-md-4">
+                    <h4 class="text-center mb-3">🎭 Parties</h4>
+                    <div class="column-container party-column">
+                        <div class="match-card party-card" data-party="federalist" onclick="selectParty('federalist')">
+                            <strong>🔵 Federalists</strong>
+                            <p class="small">Strong federal govt, pro-business</p>
+                        </div>
+                        <div class="match-card party-card" data-party="democratic" onclick="selectParty('democratic')">
+                            <strong>🔴 Democratic-Republicans</strong>
+                            <p class="small">States' rights, pro-agriculture</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Categories -->
+                <div class="col-md-4">
+                    <h4 class="text-center mb-3">📂 Categories</h4>
+                    <div class="column-container category-column">
+                        <div class="match-card category-card" data-category="economic" onclick="selectCategory('economic')">
+                            <strong>💰 Economic Policy</strong>
+                            <p class="small">Money, taxes, trade</p>
+                        </div>
+                        <div class="match-card category-card" data-category="federal" onclick="selectCategory('federal')">
+                            <strong>⚖️ Federal Power</strong>
+                            <p class="small">Government authority</p>
+                        </div>
+                        <div class="match-card category-card" data-category="european" onclick="selectCategory('european')">
+                            <strong>🌍 European Relations</strong>
+                            <p class="small">Foreign policy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Selection Display -->
+        <div class="selection-display mt-4" id="selectionDisplay" style="display: none;">
+            <h5>Current Selection:</h5>
+            <div class="row g-2">
+                <div class="col-md-4">
+                    <div class="selected-item">
+                        <strong>Term:</strong> <span id="selectedTerm">-</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="selected-item">
+                        <strong>Party:</strong> <span id="selectedParty">-</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="selected-item">
+                        <strong>Category:</strong> <span id="selectedCategory">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="results mt-4" style="display: none;"></div>
+
+        <!-- Controls -->
+        <div class="text-center mt-4">
+            <button class="btn btn-warning btn-lg" onclick="resetGame()">🔄 Reset Game</button>
+            <a href="/games" class="btn btn-outline-secondary btn-lg">Back to Games</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.game-header {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.score-bar {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.game-board {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.column-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.match-card {
+    background: white;
+    border: 3px solid var(--sepia);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.match-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.match-card.selected {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    transform: scale(1.05);
+}
+
+.match-card.matched {
+    background: #d1fae5;
+    border-color: #10b981;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.match-card.matched:hover {
+    transform: none;
+}
+
+.party-card {
+    min-height: 100px;
+}
+
+.category-card {
+    min-height: 100px;
+}
+
+.selection-display {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--sepia);
+}
+
+.selected-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+}
+
+.results {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 4px solid #10b981;
+}
+
+@media (max-width: 768px) {
+    .game-board .col-md-4 {
+        margin-bottom: 2rem;
+    }
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/game4-match.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

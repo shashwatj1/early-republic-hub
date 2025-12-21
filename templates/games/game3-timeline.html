@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}Timeline Challenge - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Game Header -->
+        <div class="game-header text-center mb-4">
+            <h1 class="display-4">📅 Timeline Challenge</h1>
+            <p class="lead">Put 14 events in chronological order!</p>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-display mb-4">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="stat-box">
+                        <div class="stat-label">Correct</div>
+                        <div class="stat-value" id="correctCount">0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-box">
+                        <div class="stat-label">Time</div>
+                        <div class="stat-value" id="timer">0:00</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-box">
+                        <div class="stat-label">Attempts</div>
+                        <div class="stat-value" id="attempts">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="alert alert-info mb-4">
+            <strong>📋 How to Play:</strong> Drag the events from the bottom into the timeline slots in chronological order (earliest to latest). Click "Check Order" when done!
+        </div>
+
+        <!-- Timeline Slots -->
+        <div class="timeline-container">
+            <div class="timeline-slots" id="timelineSlots">
+                <!-- Slots will be generated here -->
+            </div>
+        </div>
+
+        <!-- Available Events -->
+        <div class="events-pool mt-5">
+            <h4 class="text-center mb-3">Available Events (Drag to Timeline):</h4>
+            <div class="events-grid" id="eventsPool">
+                <!-- Events will be generated here -->
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls text-center mt-4">
+            <button class="btn btn-custom btn-lg" onclick="checkOrder()">✅ Check Order</button>
+            <button class="btn btn-warning btn-lg" onclick="resetGame()">🔄 Reset</button>
+            <button class="btn btn-info btn-lg" onclick="showHint()">💡 Hint</button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="results mt-4" style="display: none;"></div>
+    </div>
+</section>
+
+<style>
+.game-header {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.score-display {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-box {
+    padding: 1rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--sepia);
+}
+
+.timeline-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+    min-height: 400px;
+}
+
+.timeline-slots {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.timeline-slot {
+    background: #f8f9fa;
+    border: 3px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 1rem 1rem 1rem 3.5rem;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-left: 1rem;
+}
+
+.timeline-slot::before {
+    content: attr(data-position);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--sepia);
+    width: 30px;
+    text-align: center;
+}
+
+.placed-event-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+    cursor: grab;
+}
+
+.placed-event-content:active {
+    cursor: grabbing;
+}
+
+.remove-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-btn:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.timeline-slot.drag-over {
+    background: #dbeafe;
+    border-color: #3b82f6;
+    border-style: solid;
+}
+
+.timeline-slot.filled {
+    background: white;
+    border-color: var(--sepia);
+    border-style: solid;
+}
+
+.timeline-slot.correct {
+    background: #d1fae5;
+    border-color: #10b981;
+}
+
+.timeline-slot.incorrect {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+.events-pool {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.event-card {
+    background: white;
+    border: 3px solid var(--sepia);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: move;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.event-card.dragging {
+    opacity: 0.5;
+}
+
+.event-card.placed {
+    display: none; /* Completely hide like a puzzle piece */
+}
+
+.event-title {
+    font-weight: 700;
+    color: var(--sepia);
+    margin-bottom: 0.5rem;
+}
+
+.event-year {
+    font-size: 0.9rem;
+    color: #6b7280;
+    display: none; /* Hidden during game */
+}
+
+.event-year.revealed {
+    display: block;
+}
+
+.results {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 4px solid #10b981;
+}
+
+.controls {
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .timeline-slot {
+        padding: 1rem;
+        margin-left: 0;
+    }
+    
+    .timeline-slot::before {
+        position: static;
+        transform: none;
+        display: inline-block;
+        margin-right: 0.5rem;
+    }
+    
+    .placed-event-content {
+        flex-wrap: wrap;
+    }
+    
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/game3-timeline.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}Category Blitz - Early Republic Hub{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Game Header -->
+        <div class="game-header text-center mb-4">
+            <h1 class="display-4">⚡ Category Blitz</h1>
+            <p class="lead">Sort terms into categories as fast as you can!</p>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen text-center">
+            <h2>Ready to test your speed?</h2>
+            <p class="lead">You have 60 seconds to correctly categorize as many terms as possible!</p>
+            <button class="btn btn-custom btn-lg" onclick="startGame()">▶️ Start Game</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" style="display: none;">
+            <!-- Timer and Score -->
+            <div class="game-stats mb-4">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-label">Time Left</div>
+                            <div class="stat-value timer" id="timer">60</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-label">Score</div>
+                            <div class="stat-value" id="score">0</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-label">Streak</div>
+                            <div class="stat-value" id="streak">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Term -->
+            <div class="current-term-display">
+                <h2 id="currentTerm"></h2>
+            </div>
+
+            <!-- Category Buttons -->
+            <div class="category-buttons">
+                <button class="category-btn economic" onclick="categorize('economic')">
+                    <div class="category-icon">💰</div>
+                    <div class="category-name">Economic Policy</div>
+                    <div class="category-hint">Tariffs, taxes, banks</div>
+                </button>
+                <button class="category-btn federal" onclick="categorize('federal')">
+                    <div class="category-icon">⚖️</div>
+                    <div class="category-name">Federal Power</div>
+                    <div class="category-hint">Constitution, authority</div>
+                </button>
+                <button class="category-btn european" onclick="categorize('european')">
+                    <div class="category-icon">🌍</div>
+                    <div class="category-name">European Relations</div>
+                    <div class="category-hint">Wars, trade, diplomacy</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="results-screen" style="display: none;"></div>
+    </div>
+</section>
+
+<style>
+.game-header {
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.start-screen {
+    background: white;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    border: 4px solid var(--sepia);
+}
+
+.game-stats {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.stat-box {
+    padding: 1rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--sepia);
+}
+
+.timer {
+    color: #f59e0b;
+}
+
+.timer.warning {
+    color: #ef4444;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.current-term-display {
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    border: 4px solid var(--sepia);
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.current-term-display h2 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--sepia);
+}
+
+.category-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.category-btn {
+    background: white;
+    border: 4px solid var(--sepia);
+    padding: 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.category-btn:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.category-btn.economic {
+    border-color: #f59e0b;
+}
+
+.category-btn.economic:hover {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+.category-btn.federal {
+    border-color: #8b5cf6;
+}
+
+.category-btn.federal:hover {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+}
+
+.category-btn.european {
+    border-color: #10b981;
+}
+
+.category-btn.european:hover {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.category-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.category-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--sepia);
+}
+
+.category-hint {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.results-screen {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 4px solid #10b981;
+}
+</style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/game6-category.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

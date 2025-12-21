@@ -49,6 +49,14 @@ function runImpressment() {
             <p class="mb-0"><strong>This is why War of 1812 was called "Second War of Independence"!</strong></p>
         `;
         stepsDiv.appendChild(finalDiv);
+        
+        // Add "End of simulation" message
+        setTimeout(() => {
+            const endDiv = document.createElement('div');
+            endDiv.className = 'alert alert-dark mt-2 text-center';
+            endDiv.innerHTML = `<strong>━━━ End of simulation ━━━</strong>`;
+            stepsDiv.appendChild(endDiv);
+        }, 2000);
     }, 11000);
 }
 
