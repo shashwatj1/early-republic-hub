@@ -92,7 +92,7 @@ function calculateWhiskeyTax() {
 }
 
 function showRebellionInfo() {
-    showNotification('The Whiskey Rebellion (1794): Farmers in western Pennsylvania refused to pay the whiskey tax. Washington sent 13,000 troops - larger than the army that won the Revolution! This showed the new federal government could enforce its laws. The rebellion collapsed without major fighting.', 'info');
+    showNotification('The Whiskey Rebellion (1794): Farmers in western Pennsylvania refused to pay the whiskey tax. Washington sent 13,000 troops - larger than the army that won the Revolution! This showed the new federal government could enforce its laws, which it couldt do during Shays Rebellion. The rebellion collapsed without major fighting.', 'info');
     
     // Create a modal with more info
     const modal = `

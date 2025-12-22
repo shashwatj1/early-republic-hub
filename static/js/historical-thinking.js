@@ -16,7 +16,7 @@ const changeData = {
             "Arguments about interpreting the Constitution",
             "Tensions with European powers (Britain and France)"
         ],
-        analysis: "In 1790, the new nation was just beginning. The Constitution was only 3 years old, and political parties were forming."
+        analysis: "In 1790, the new nation was just beginning. The Constitution was only 3 years old, and political parties were forming. Parties such as the Democratic Republicans and the Federalists began to take power in the young government. George Washington was still in his first time and was still powerful, while debates on how foreigns relations withe the French and British began to spread. "
     },
     1800: {
         changed: [
@@ -28,7 +28,7 @@ const changeData = {
             "Economic disagreements about tariffs and taxes",
             "Constitutional interpretation battles"
         ],
-        analysis: "The 'Revolution of 1800' showed democracy could work - power transferred peacefully from Federalists to Democratic-Republicans."
+        analysis: "The 'Revolution of 1800' showed democracy could work - power transferred peacefully from Federalists to Democratic-Republicans despite how much tension there was between the two sides. This was the first test that the American Experiment passed proving that the people could control the government. "
     },
     1807: {
         changed: [
@@ -41,7 +41,7 @@ const changeData = {
             "European wars still affecting America",
             "Debates about how to respond to foreign threats"
         ],
-        analysis: "Jefferson's Embargo Act was a disaster - 'peaceable coercion' failed to change British behavior but devastated American trade."
+        analysis: "Jefferson's Embargo Act was a disaster - 'peaceable coercion' failed to change British behavior but devastated American trade. Despite the attempts of peaceful coersion being optimistic, its actual effects on the American people were much was positive."
     },
     1812: {
         changed: [

@@ -1,81 +1,610 @@
 {% extends "base.html" %}
 
-{% block title %}Visual Breakdown - Early Republic Hub{% endblock %}
+{% block title %}Visualizations - Early Republic Hub{% endblock %}
 
 {% block content %}
 <section class="py-5">
     <div class="container">
-        <div class="text-center mb-5">
-            <h1 class="display-3 fw-bold" style="font-family: var(--font-display); color: var(--sepia);">
-                📊 VISUAL BREAKDOWN
-            </h1>
-            <p class="lead">Interactive tools to understand the big picture</p>
+        <!-- Page Header -->
+        <div class="viz-header text-center mb-5">
+            <h1 class="display-4">📊 Visual Learning Tools</h1>
+            <p class="lead">Interactive visualizations to understand the Early Republic</p>
         </div>
-        
-        <div class="row g-4">
-            <!-- Three Pillars -->
-            <div class="col-md-6">
-                <div class="viz-card">
-                    <h3>🏛️ The Three Pillars</h3>
-                    <p>Interactive diagram showing how terms relate to Economic Policy, Federal Power, and European Relations</p>
-                    <a href="/visualizations/pillars" class="btn btn-custom">Explore →</a>
+
+        <!-- Navigation Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="viz-nav-card" onclick="scrollToSection('pillars')">
+                    <div class="viz-icon">🏛️</div>
+                    <h5>Three Pillars</h5>
+                    <p class="small">Economic, Federal, European</p>
                 </div>
             </div>
-            
-            <!-- Timeline -->
-            <div class="col-md-6">
-                <div class="viz-card">
-                    <h3>📅 Interactive Timeline</h3>
-                    <p>See all events from 1790-1825 with political tension tracker</p>
-                    <a href="/visualizations/timeline" class="btn btn-custom">View Timeline →</a>
+            <div class="col-md-6 col-lg-3">
+                <div class="viz-nav-card" onclick="scrollToSection('timeline')">
+                    <div class="viz-icon">📅</div>
+                    <h5>Timeline</h5>
+                    <p class="small">1800-1825 with tensions</p>
                 </div>
             </div>
-            
-            <!-- Comparison -->
-            <div class="col-md-6">
-                <div class="viz-card">
-                    <h3>⚖️ Party Comparison</h3>
-                    <p>Build your own comparison matrix of Federalist vs Democratic-Republican positions</p>
-                    <a href="/visualizations/comparison" class="btn btn-custom">Compare →</a>
+            <div class="col-md-6 col-lg-3">
+                <div class="viz-nav-card" onclick="scrollToSection('comparison')">
+                    <div class="viz-icon">⚖️</div>
+                    <h5>Party Matrix</h5>
+                    <p class="small">Compare positions</p>
                 </div>
             </div>
-            
-            <!-- Cause & Effect -->
-            <div class="col-md-6">
-                <div class="viz-card">
-                    <h3>🔄 Cause & Effect Web</h3>
-                    <p>Interactive network showing how events led to each other</p>
-                    <a href="#" class="btn btn-custom" onclick="alert('Coming soon!'); return false;">Coming Soon →</a>
+            <div class="col-md-6 col-lg-3">
+                <div class="viz-nav-card" onclick="scrollToSection('causeEffect')">
+                    <div class="viz-icon">🕸️</div>
+                    <h5>Cause & Effect</h5>
+                    <p class="small">Event connections</p>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Visualization 1: Three Pillars -->
+        <div id="pillars" class="viz-section mb-5">
+            <h2 class="section-title">🏛️ Three Pillars of the Early Republic</h2>
+            <p class="section-description">Explore the three main categories of issues that defined this era</p>
+            
+            <div class="pillars-container">
+                <div class="pillar economic-pillar">
+                    <div class="pillar-header" onclick="togglePillar('economic')">
+                        <h3>💰 Economic Policy</h3>
+                        <span class="pillar-toggle" id="economic-toggle">▼</span>
+                    </div>
+                    <div class="pillar-content" id="economic-content">
+                        <div class="pillar-item">
+                            <h5>Tariff</h5>
+                            <p>Tax on imported goods - Federalists supported, D-Rs opposed</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>National Bank</h5>
+                            <p>Hamilton's bank for currency & credit - constitutional debate</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>Whiskey Tax</h5>
+                            <p>Internal tax that sparked rebellion in 1794</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>American System</h5>
+                            <p>Clay's plan: tariffs, bank, internal improvements</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pillar federal-pillar">
+                    <div class="pillar-header" onclick="togglePillar('federal')">
+                        <h3>⚖️ Federal Power</h3>
+                        <span class="pillar-toggle" id="federal-toggle">▼</span>
+                    </div>
+                    <div class="pillar-content" id="federal-content">
+                        <div class="pillar-item">
+                            <h5>Elastic Clause</h5>
+                            <p>"Necessary and proper" - loose vs strict interpretation</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>Louisiana Purchase</h5>
+                            <p>1803 - Jefferson compromised principles to buy territory</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>Hartford Convention</h5>
+                            <p>1814 - Federalists opposed war, party died afterward</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pillar european-pillar">
+                    <div class="pillar-header" onclick="togglePillar('european')">
+                        <h3>🌍 European Relations</h3>
+                        <span class="pillar-toggle" id="european-toggle">▼</span>
+                    </div>
+                    <div class="pillar-content" id="european-content">
+                        <div class="pillar-item">
+                            <h5>Impressment</h5>
+                            <p>British forcing American sailors into Royal Navy</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>Embargo Act (1807)</h5>
+                            <p>Jefferson banned all trade - devastated U.S. economy</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>War of 1812</h5>
+                            <p>Second war with Britain - ended in stalemate</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>Treaty of Ghent</h5>
+                            <p>1814 - Ended war with status quo ante bellum</p>
+                        </div>
+                        <div class="pillar-item">
+                            <h5>Monroe Doctrine</h5>
+                            <p>1823 - Americas off-limits to European colonization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualization 2: Timeline with Tension Meter -->
+        <div id="timeline" class="viz-section mb-5">
+            <h2 class="section-title">📅 Interactive Timeline with Tension Meter</h2>
+            <p class="section-description">See how political tensions rose and fell from 1800-1825</p>
+            
+            <div class="timeline-viz">
+                <div class="tension-meter">
+                    <h5 class="text-center mb-3">Political Tension Level</h5>
+                    <div class="meter-container">
+                        <div class="meter-bar" id="tensionBar"></div>
+                        <div class="meter-label" id="tensionLabel">Select a year</div>
+                    </div>
+                </div>
+
+                <div class="timeline-track">
+                    <div class="timeline-year" data-year="1800" onclick="selectYear(1800)">
+                        <div class="year-marker">1800</div>
+                        <div class="year-event">Revolution of 1800</div>
+                    </div>
+                    <div class="timeline-year" data-year="1803" onclick="selectYear(1803)">
+                        <div class="year-marker">1803</div>
+                        <div class="year-event">Louisiana Purchase</div>
+                    </div>
+                    <div class="timeline-year" data-year="1807" onclick="selectYear(1807)">
+                        <div class="year-marker">1807</div>
+                        <div class="year-event">Embargo Act</div>
+                    </div>
+                    <div class="timeline-year" data-year="1812" onclick="selectYear(1812)">
+                        <div class="year-marker">1812</div>
+                        <div class="year-event">War of 1812</div>
+                    </div>
+                    <div class="timeline-year" data-year="1814" onclick="selectYear(1814)">
+                        <div class="year-marker">1814</div>
+                        <div class="year-event">Hartford Convention</div>
+                    </div>
+                    <div class="timeline-year" data-year="1815" onclick="selectYear(1815)">
+                        <div class="year-marker">1815</div>
+                        <div class="year-event">Era of Good Feelings</div>
+                    </div>
+                    <div class="timeline-year" data-year="1823" onclick="selectYear(1823)">
+                        <div class="year-marker">1823</div>
+                        <div class="year-event">Monroe Doctrine</div>
+                    </div>
+                </div>
+
+                <div class="timeline-details" id="timelineDetails">
+                    <h4>Click on a year to see details</h4>
+                    <p>Explore major events and their impact on political tensions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualization 3: Comparison Matrix -->
+        <div id="comparison" class="viz-section mb-5">
+            <h2 class="section-title">⚖️ Federalists vs Democratic-Republicans</h2>
+            <p class="section-description">Compare party positions on major issues</p>
+            
+            <div class="comparison-matrix">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Issue</th>
+                            <th class="federalist-col">🔵 Federalists</th>
+                            <th class="democratic-col">🔴 Democratic-Republicans</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Federal Power</strong></td>
+                            <td class="federalist-cell">✅ Strong central government</td>
+                            <td class="democratic-cell">❌ States' rights priority</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Constitution</strong></td>
+                            <td class="federalist-cell">✅ Loose interpretation</td>
+                            <td class="democratic-cell">❌ Strict interpretation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tariffs</strong></td>
+                            <td class="federalist-cell">✅ High protective tariffs</td>
+                            <td class="democratic-cell">❌ Low/no tariffs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>National Bank</strong></td>
+                            <td class="federalist-cell">✅ Support</td>
+                            <td class="democratic-cell">❌ Oppose (unconstitutional)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Economy</strong></td>
+                            <td class="federalist-cell">✅ Manufacturing & commerce</td>
+                            <td class="democratic-cell">✅ Agriculture & farming</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Foreign Policy</strong></td>
+                            <td class="federalist-cell">✅ Pro-British</td>
+                            <td class="democratic-cell">✅ Pro-French (initially)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>War of 1812</strong></td>
+                            <td class="federalist-cell">❌ Opposed (Hartford Convention)</td>
+                            <td class="democratic-cell">✅ Supported</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ideal Society</strong></td>
+                            <td class="federalist-cell">🏭 Urban, commercial</td>
+                            <td class="democratic-cell">🌾 Rural, agrarian</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Visualization 4: Cause & Effect Web -->
+        <div id="causeEffect" class="viz-section mb-5">
+            <h2 class="section-title">🕸️ Cause & Effect Network</h2>
+            <p class="section-description">See how events connected and influenced each other</p>
+            
+            <div class="cause-effect-web">
+                <div class="web-controls mb-3">
+                    <button class="btn btn-sm btn-custom" onclick="resetWeb()">Reset View</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="showAllConnections()">Show All</button>
+                </div>
+
+                <div class="web-container" id="webContainer">
+                    <svg id="causeEffectSVG" width="100%" height="600"></svg>
+                </div>
+
+                <div class="web-legend">
+                    <h5>Click on events to explore connections</h5>
+                    <div class="legend-items">
+                        <span class="legend-item"><span class="dot economic-dot"></span> Economic</span>
+                        <span class="legend-item"><span class="dot federal-dot"></span> Federal Power</span>
+                        <span class="legend-item"><span class="dot european-dot"></span> European Relations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Button -->
         <div class="text-center mt-5">
-            <a href="/" class="btn btn-outline-secondary btn-lg">← Back to Home</a>
+            <a href="/" class="btn btn-custom btn-lg">← Back to Home</a>
         </div>
     </div>
 </section>
 
 <style>
-.viz-card {
+.viz-header {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+}
+
+.viz-nav-card {
     background: white;
     border: 3px solid var(--sepia);
     border-radius: 15px;
-    padding: 2rem;
-    height: 100%;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.viz-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-    border-color: #d4af37;
+.viz-nav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    background: #fef3c7;
 }
 
-.viz-card h3 {
+.viz-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.viz-section {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 4px solid var(--sepia);
+    scroll-margin-top: 100px;
+}
+
+.section-title {
     font-family: var(--font-display);
     color: var(--sepia);
     margin-bottom: 1rem;
 }
+
+.section-description {
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Pillars Visualization */
+.pillars-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.pillar {
+    border: 3px solid var(--sepia);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.pillar-header {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.pillar-header:hover {
+    opacity: 0.9;
+}
+
+.economic-pillar .pillar-header {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+.federal-pillar .pillar-header {
+    background: linear-gradient(135deg, #ddd6fe, #c4b5fd);
+}
+
+.european-pillar .pillar-header {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.pillar-toggle {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.pillar-toggle.open {
+    transform: rotate(180deg);
+}
+
+.pillar-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.pillar-content.open {
+    max-height: 1000px;
+}
+
+.pillar-item {
+    padding: 1.5rem;
+    border-top: 2px solid #e5e7eb;
+}
+
+.pillar-item h5 {
+    color: var(--sepia);
+    margin-bottom: 0.5rem;
+}
+
+/* Timeline Visualization */
+.timeline-viz {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.tension-meter {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.meter-container {
+    position: relative;
+    height: 40px;
+    background: linear-gradient(to right, #10b981, #fbbf24, #ef4444);
+    border-radius: 20px;
+    overflow: visible;
+}
+
+.meter-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: rgba(0,0,0,0.2);
+    transition: width 0.5s ease;
+    border-radius: 20px;
+}
+
+.meter-label {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transition: left 0.5s ease;
+    white-space: nowrap;
+}
+
+.timeline-track {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.timeline-track::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--sepia);
+    z-index: 0;
+}
+
+.timeline-year {
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+    position: relative;
+}
+
+.year-marker {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 4px solid var(--sepia);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.7rem;
+    margin: 0 auto 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-year:hover .year-marker {
+    background: #fef3c7;
+    transform: scale(1.2);
+}
+
+.timeline-year.active .year-marker {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.year-event {
+    font-size: 0.8rem;
+    max-width: 80px;
+}
+
+.timeline-details {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    min-height: 150px;
+}
+
+/* Comparison Matrix */
+.comparison-matrix {
+    overflow-x: auto;
+}
+
+.matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.matrix-table th, .matrix-table td {
+    padding: 1.5rem;
+    text-align: left;
+    border: 2px solid #e5e7eb;
+}
+
+.matrix-table th {
+    background: var(--sepia);
+    color: white;
+    font-weight: 700;
+}
+
+.federalist-col {
+    background: #dbeafe;
+}
+
+.democratic-col {
+    background: #fecaca;
+}
+
+.federalist-cell {
+    background: #eff6ff;
+}
+
+.democratic-cell {
+    background: #fef2f2;
+}
+
+/* Cause & Effect Web */
+.cause-effect-web {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.web-container {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.web-legend {
+    margin-top: 1.5rem;
+    text-center;
+}
+
+.legend-items {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.economic-dot {
+    background: #fbbf24;
+}
+
+.federal-dot {
+    background: #8b5cf6;
+}
+
+.european-dot {
+    background: #10b981;
+}
+
+@media (max-width: 768px) {
+    .pillars-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline-track {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .timeline-track::before {
+        width: 4px;
+        height: 100%;
+        left: 20px;
+        top: 0;
+    }
+}
 </style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/visualizations.js') }}"></script>
+{% endblock %}
+
 {% endblock %}

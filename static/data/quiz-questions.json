@@ -1,0 +1,136 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What was Henry Clay's economic System?",
+      "options": [
+        "Play-off System",
+        "American System",
+        "Patroon System",
+        "Tri-branch system"
+      ],
+      "correct": 1,
+      "explanation": "The American System was Henry Clay's economic plan that included protective tariffs, a national bank, and internal improvements to strengthen the American economy."
+    },
+    {
+      "id": 2,
+      "question": "Which 1823 U.S. policy statement warned European nations that any further efforts to colonize land or interfere with states in North or South America would be viewed as acts of aggression?",
+      "options": [
+        "The Monroe Doctrine",
+        "The Marshall Plan",
+        "The Manifest Destiny",
+        "The Truman Doctrine"
+      ],
+      "correct": 0,
+      "explanation": "The Monroe Doctrine (1823) declared that the Americas were closed to European colonization and that any European interference would be seen as a hostile act against the United States."
+    },
+    {
+      "id": 3,
+      "question": "Which 1814 agreement ended the War of 1812?",
+      "options": [
+        "The Adams-Onís Treaty",
+        "The Treaty of Paris",
+        "The Jay Treaty",
+        "The Treaty of Ghent"
+      ],
+      "correct": 3,
+      "explanation": "The Treaty of Ghent was signed on December 24, 1814, ending the War of 1812 and restoring relations to status quo ante bellum (the state before the war)."
+    },
+    {
+      "id": 4,
+      "question": "Which British practice involved the forced recruitment of American sailors into the Royal Navy and served as a main cause for the War of 1812?",
+      "options": [
+        "Impressment",
+        "Embargo",
+        "Privateering",
+        "Conscription"
+      ],
+      "correct": 0,
+      "explanation": "Impressment was the British practice of forcibly seizing American sailors and forcing them to serve on British warships. This violation of American sovereignty was a major cause of the War of 1812."
+    },
+    {
+      "id": 5,
+      "question": "Which diplomatic strategy did Native American nations use prior to 1815?",
+      "options": [
+        "The Play-off System",
+        "Manifest Destiny",
+        "The Factory System",
+        "The Spoils System"
+      ],
+      "correct": 0,
+      "explanation": "The Play-off System was a diplomatic strategy where Native American nations played European powers (and later the U.S.) against each other to maintain their independence and territorial control."
+    },
+    {
+      "id": 6,
+      "question": "Which 1807 law, intended to pressure Britain and France into respecting American neutrality?",
+      "options": [
+        "Macon's Bill No. 2",
+        "The Embargo Act of 1807",
+        "The Non-Intercourse Act",
+        "The Alien and Sedition Acts"
+      ],
+      "correct": 1,
+      "explanation": "The Embargo Act of 1807 banned all American ships from trading with foreign nations. Jefferson hoped this would pressure Britain and France to respect American neutrality, but it devastated the American economy instead."
+    },
+    {
+      "id": 7,
+      "question": "Which 1814 meeting of New England Federalists discussed grievances regarding the War of 1812?",
+      "options": [
+        "The Albany Congress",
+        "The Constitutional Convention",
+        "The Seneca Falls Convention",
+        "The Hartford Convention"
+      ],
+      "correct": 3,
+      "explanation": "The Hartford Convention (December 1814 - January 1815) was a meeting of New England Federalists who opposed the War of 1812. Their proposals for constitutional amendments arrived in Washington right as the war ended, making them appear unpatriotic and contributing to the death of the Federalist Party."
+    },
+    {
+      "id": 8,
+      "question": "Which economic tool was used by the U.S. government in the 19th century to raise revenue and protect domestic manufacturing?",
+      "options": [
+        "The Tariff",
+        "The Income Tax",
+        "The Subsidy",
+        "The Excise Tax"
+      ],
+      "correct": 0,
+      "explanation": "Tariffs (taxes on imported goods) were the primary source of federal revenue in the early republic and were used to protect American manufacturers from foreign competition. This was a key point of debate between Federalists (pro-tariff) and Democratic-Republicans (anti-tariff)."
+    },
+    {
+      "id": 9,
+      "question": "Which constitutional provision, also known as the 'Necessary and Proper Clause'?",
+      "options": [
+        "The Tenth Amendment",
+        "The Supremacy Clause",
+        "The Commerce Clause",
+        "The Elastic Clause"
+      ],
+      "correct": 3,
+      "explanation": "The Elastic Clause (Article I, Section 8) states Congress can make laws 'necessary and proper' for executing its powers. Federalists used loose interpretation of this clause to expand federal power, while Democratic-Republicans favored strict interpretation."
+    },
+    {
+      "id": 10,
+      "question": "Which Presidential Candidate ran as a Democratic Republican?",
+      "options": [
+        "Alexander Hamilton",
+        "Paul Revere",
+        "Thomas Jefferson",
+        "George Washington"
+      ],
+      "correct": 2,
+      "explanation": "Thomas Jefferson was the leader of the Democratic-Republican Party and won the presidency in 1800, defeating Federalist John Adams in what he called the 'Revolution of 1800.'"
+    },
+    {
+      "id": 11,
+      "question": "Which of the following was NOT supported by the Federalists?",
+      "options": [
+        "An Agrarian Society",
+        "Strong Central Government",
+        "A factory based society",
+        "A national bank"
+      ],
+      "correct": 0,
+      "explanation": "Federalists did NOT support an agrarian (farming-based) society. They favored manufacturing, commerce, a strong central government, and a national bank. It was the Democratic-Republicans who idealized an agrarian society of independent farmers."
+    }
+  ]
+}

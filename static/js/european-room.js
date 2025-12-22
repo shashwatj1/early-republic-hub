@@ -46,7 +46,7 @@ function runImpressment() {
         finalDiv.innerHTML = `
             <h5>This happened to over 10,000 Americans!</h5>
             <p>Now you understand why Americans were so angry. Britain treated the U.S. like a colony, not an independent nation.</p>
-            <p class="mb-0"><strong>This is why War of 1812 was called "Second War of Independence"!</strong></p>
+            <p class="mb-0"><strong>This is why War of 1812 was sometimes called the "Second War of Independence"!</strong></p>
         `;
         stepsDiv.appendChild(finalDiv);
         

@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 # Configure for production
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'early-republic-2024-history')
-
 # Home route
 @app.route('/')
 def index():

@@ -96,7 +96,7 @@ function makeChoice(choice) {
                 <div class="mt-3 p-3 bg-warning rounded">
                     <strong>🤔 The Hypocrisy:</strong> Jefferson spent years arguing for strict interpretation, then used a <em>loose</em> interpretation when it suited him! Federalists called him out on this, but most Americans were thrilled with the purchase.
                 </div>
-                <p class="mt-3 mb-0"><strong>Result:</strong> Louisiana Purchase went through. Jefferson was pragmatic over principled. Sometimes leaders have to compromise their beliefs for the greater good!</p>
+                <p class="mt-3 mb-0"><strong>Result:</strong> Jefferson was able to purchase Louisina as well the rest of France's terriroy in North America for only 15 Milllion dollars at the time, this was a very imnportant for the devoloping and territory country hungry country. </p>
             </div>
         `;
     } else if (choice === 'refuse') {
@@ -127,7 +127,7 @@ function makeChoice(choice) {
                     <li>Deal could fall through</li>
                 </ul>
                 <p><strong>What actually happened:</strong> Jefferson started drafting an amendment, but his advisors convinced him the opportunity was too urgent. He bought Louisiana without the amendment.</p>
-                <p class="mb-0"><strong>Lesson:</strong> The "right" way isn't always the practical way in politics!</p>
+                <p class="mb-0"><strong>Lesson:</strong> This proved that the elastic clause was neccesary and that Jefferson did not alwasy follow his morals.  </p>
             </div>
         `;
     }

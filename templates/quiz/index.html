@@ -1,103 +1,329 @@
 {% extends "base.html" %}
 
-{% block title %}Test Yourself - Early Republic Hub{% endblock %}
+{% block title %}Quiz - Early Republic Hub{% endblock %}
 
 {% block content %}
 <section class="py-5">
     <div class="container">
-        <div class="text-center mb-5">
-            <h1 class="display-3 fw-bold" style="font-family: var(--font-display); color: var(--sepia);">
-                🏆 TEST YOURSELF
-            </h1>
-            <p class="lead">Multiple quiz formats to assess your mastery</p>
+        <!-- Quiz Header -->
+        <div class="quiz-header text-center mb-5">
+            <h1 class="display-4">📝 Early Republic Quiz</h1>
+            <p class="lead">Test your knowledge of 1800-1825 American history</p>
         </div>
-        
-        <div class="row g-4 justify-content-center">
-            <!-- Traditional Quiz -->
-            <div class="col-md-6 col-lg-4">
-                <div class="quiz-card">
-                    <div class="quiz-icon">📝</div>
-                    <h3>Traditional Quiz</h3>
-                    <p>30 multiple choice questions covering all 14 terms</p>
-                    <div class="mb-3">
-                        <span class="badge bg-primary">30 Questions</span>
-                        <span class="badge bg-info">20 Minutes</span>
+
+        <!-- Quiz Start Screen -->
+        <div id="quizStart" class="quiz-start">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="start-card">
+                        <h2>Ready to test your knowledge?</h2>
+                        <p class="lead">This quiz covers all the major topics from the Early Republic period:</p>
+                        <ul class="quiz-topics">
+                            <li>💰 Economic Policy (Tariffs, American System, Whiskey Tax)</li>
+                            <li>⚖️ Federal Power (Elastic Clause, Louisiana Purchase, Hartford Convention)</li>
+                            <li>🌍 European Relations (Impressment, Embargo Act, War of 1812, Monroe Doctrine)</li>
+                        </ul>
+                        
+                        <div class="quiz-info mt-4">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <div class="info-box">
+                                        <h3 id="totalQuestions">0</h3>
+                                        <p>Questions</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-box">
+                                        <h3>Multiple Choice</h3>
+                                        <p>Format</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-box">
+                                        <h3>~10 min</h3>
+                                        <p>Duration</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-custom btn-lg" onclick="startQuiz()">Start Quiz →</button>
+                        </div>
                     </div>
-                    <button class="btn btn-custom" onclick="alert('Coming soon!')">Start Quiz →</button>
-                </div>
-            </div>
-            
-            <!-- Speed Round -->
-            <div class="col-md-6 col-lg-4">
-                <div class="quiz-card">
-                    <div class="quiz-icon">⚡</div>
-                    <h3>Speed Round</h3>
-                    <p>How many can you answer correctly in 60 seconds?</p>
-                    <div class="mb-3">
-                        <span class="badge bg-danger">Fast-Paced</span>
-                        <span class="badge bg-warning text-dark">Leaderboard</span>
-                    </div>
-                    <button class="btn btn-custom" onclick="alert('Coming soon!')">Start Speed Round →</button>
-                </div>
-            </div>
-            
-            <!-- APUSH Practice -->
-            <div class="col-md-6 col-lg-4">
-                <div class="quiz-card">
-                    <div class="quiz-icon">🎓</div>
-                    <h3>APUSH-Style Questions</h3>
-                    <p>Practice with AP exam-style stimulus-based questions</p>
-                    <div class="mb-3">
-                        <span class="badge bg-success">Exam Prep</span>
-                        <span class="badge bg-info">With Documents</span>
-                    </div>
-                    <button class="btn btn-custom" onclick="alert('Coming soon!')">Practice DBQ →</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-5 p-4 bg-light rounded">
-            <h3>📊 Your Progress</h3>
-            <p class="mb-3">Track your mastery across all 14 terms</p>
-            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" id="progressBar">
-                    0% Complete
                 </div>
             </div>
         </div>
-        
-        <div class="text-center mt-5">
-            <a href="/" class="btn btn-outline-secondary btn-lg">← Back to Home</a>
+
+        <!-- Quiz Questions Screen -->
+        <div id="quizQuestions" style="display: none;">
+            <!-- Progress Bar -->
+            <div class="progress-container mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Question <span id="currentQ">1</span> of <span id="totalQ">0</span></span>
+                    <span>Score: <strong id="currentScore">0</strong></span>
+                </div>
+                <div class="progress" style="height: 25px;">
+                    <div class="progress-bar bg-success" id="quizProgress" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="question-card">
+                <h3 id="questionText"></h3>
+                
+                <div id="optionsContainer" class="options-container mt-4">
+                    <!-- Options will be generated here -->
+                </div>
+
+                <div id="feedback" class="feedback mt-4" style="display: none;"></div>
+
+                <div class="quiz-controls mt-4">
+                    <button id="nextBtn" class="btn btn-custom btn-lg" onclick="nextQuestion()" style="display: none;">
+                        Next Question →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Results Screen -->
+        <div id="quizResults" style="display: none;">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="results-card">
+                        <h2 class="text-center mb-4">🎉 Quiz Complete!</h2>
+                        
+                        <div class="score-display">
+                            <div class="final-score">
+                                <h1 id="finalScore">0%</h1>
+                                <p id="scoreMessage"></p>
+                            </div>
+                        </div>
+
+                        <div class="stats-grid mt-4">
+                            <div class="stat-item">
+                                <h3 id="correctCount">0</h3>
+                                <p>Correct</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 id="incorrectCount">0</h3>
+                                <p>Incorrect</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 id="accuracyRate">0%</h3>
+                                <p>Accuracy</p>
+                            </div>
+                        </div>
+
+                        <div id="reviewSection" class="review-section mt-5">
+                            <h4>📚 Review Your Answers:</h4>
+                            <div id="reviewList"></div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-custom btn-lg me-2" onclick="restartQuiz()">Take Again</button>
+                            <a href="/" class="btn btn-outline-secondary btn-lg">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <style>
-.quiz-card {
+.quiz-header {
+    background: linear-gradient(135deg, #1e3a8a, #991b1b);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+}
+
+.quiz-start, .question-card, .results-card {
+    background: white;
+    border: 4px solid var(--sepia);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.start-card {
+    text-align: center;
+}
+
+.quiz-topics {
+    text-align: left;
+    display: inline-block;
+    font-size: 1.1rem;
+}
+
+.quiz-topics li {
+    margin: 0.75rem 0;
+}
+
+.info-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--sepia);
+}
+
+.info-box h3 {
+    color: var(--sepia);
+    margin-bottom: 0.5rem;
+}
+
+.progress-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 3px solid var(--sepia);
+}
+
+.question-card h3 {
+    font-family: var(--font-display);
+    color: var(--sepia);
+    font-size: 1.8rem;
+    line-height: 1.6;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.option-btn {
     background: white;
     border: 3px solid var(--sepia);
-    border-radius: 15px;
-    padding: 2rem;
-    text-align: center;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: left;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
-    height: 100%;
+    cursor: pointer;
+    position: relative;
 }
 
-.quiz-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-    border-color: #d4af37;
+.option-btn:hover:not(.selected):not(.disabled) {
+    background: #fef3c7;
+    transform: translateX(10px);
 }
 
-.quiz-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+.option-btn.selected {
+    background: #dbeafe;
+    border-color: #3b82f6;
 }
 
-.quiz-card h3 {
-    font-family: var(--font-display);
+.option-btn.correct {
+    background: #d1fae5;
+    border-color: #10b981;
+}
+
+.option-btn.incorrect {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+.option-btn.disabled {
+    cursor: not-allowed;
+}
+
+.option-label {
+    font-weight: 700;
+    margin-right: 1rem;
+    color: var(--sepia);
+}
+
+.feedback {
+    background: #f8f9fa;
+    border-left: 5px solid #3b82f6;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.feedback.correct {
+    background: #d1fae5;
+    border-left-color: #10b981;
+}
+
+.feedback.incorrect {
+    background: #fee2e2;
+    border-left-color: #ef4444;
+}
+
+.score-display {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border: 4px solid #3b82f6;
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+}
+
+.final-score h1 {
+    font-size: 5rem;
+    font-weight: 900;
     color: var(--sepia);
     margin-bottom: 1rem;
 }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.stat-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 3px solid var(--sepia);
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--sepia);
+    margin-bottom: 0.5rem;
+}
+
+.review-section {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid var(--sepia);
+}
+
+.review-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border-left: 5px solid #cbd5e1;
+}
+
+.review-item.correct {
+    border-left-color: #10b981;
+}
+
+.review-item.incorrect {
+    border-left-color: #ef4444;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .final-score h1 {
+        font-size: 3rem;
+    }
+}
 </style>
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}
+
 {% endblock %}
