@@ -249,4 +249,108 @@
         <a href="/games" class="btn btn-light btn-lg">Start Playing Now</a>
     </div>
 </section>
+
+<style>
+@media (max-width: 768px) {
+    #hero {
+        display: flex;
+        flex-direction: column;
+        height: auto !important;
+        min-height: 100vh;
+        position: relative;
+    }
+    
+    .party-side {
+        position: relative !important;
+        width: 100% !important;
+        min-height: 35vh;
+        transform: none !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .federalist-side {
+        order: 1;
+    }
+    
+    .democratic-side {
+        order: 3;
+    }
+    
+    .debate-floor {
+        position: relative !important;
+        transform: none !important;
+        width: 100%;
+        padding: 3rem 1rem;
+        order: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 30vh;
+    }
+    
+    .debate-content {
+        width: 100%;
+    }
+    
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem !important;
+    }
+    
+    .debate-badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .debate-topics h3 {
+        font-size: 1.3rem;
+    }
+    
+    .party-icon {
+        font-size: 3rem;
+    }
+    
+    .party-name {
+        font-size: 1.5rem;
+    }
+    
+    .party-leaders {
+        font-size: 0.9rem;
+    }
+    
+    .party-principles p {
+        font-size: 0.9rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+    }
+    
+    .timeline-point {
+        padding: 1rem;
+    }
+    
+    .term-card {
+        padding: 1rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem !important;
+    }
+    
+    .lead {
+        font-size: 1.1rem !important;
+    }
+}
+</style>
+
 {% endblock %}
